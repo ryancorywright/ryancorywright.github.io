@@ -1,0 +1,32 @@
+/*************************************************
+ *  An Example Green Theme for Hugo Academic
+ *  Set `custom_css = ["green.css"] in `config.toml`.
+ *  Then save this file as `/static/css/green.css` relative to your website root (i.e. not in `themes/academic` directory).
+ *  https://github.com/gcushen/hugo-academic
+ **************************************************/
+
+figure.two {
+    width: 49%;
+    float: left;
+    margin: 0;
+    text-align: center;
+    padding: 0;
+}
+
+figure.three {
+    width: 33%;
+    float: left;
+    margin: 0;
+    text-align: center;
+    padding: 0;
+    /*display: inline-block;*/
+}
+
+div.three {
+  width: 100%;
+  float: left;
+  margin: 0;
+  text-align: center;
+  padding: 0;
+  /*display: inline-block;*/
+}
