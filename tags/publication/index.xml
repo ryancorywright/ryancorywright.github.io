@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Publication on Math for Humans</title>
+    <link>/tags/publication/</link>
+    <description>Recent content in Publication on Math for Humans</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017 Phil Chodrow</copyright>
+    <lastBuildDate>Fri, 25 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/publication/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>An Opinionated Introduction to Information Theory</title>
+      <link>/post/intro_information_theory/</link>
+      <pubDate>Fri, 25 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/intro_information_theory/</guid>
+      <description>&lt;p&gt;Information theory has been one of the cornerstones of my research methodology over the previous year. Many systems scientists use information concepts in their own work, but may not be familiar with the fundamentals of the theory. If you are curious about information theory, or if you would just like a refresher on the basics, then you may enjoy these &lt;a href=&#34;https://arxiv.org/abs/1708.07459&#34; target=&#34;_blank&#34;&gt;recently-posted notes&lt;/a&gt;, which are distilled from an informal seminar I led at Northeastern’s Network Science Institute this summer.&lt;/p&gt;
+
+&lt;p&gt;They aim to outline some elements of the information-theoretic “way of thinking,” by cutting a rapid and interesting path through some of the foundational concepts and theorems. The emphasis is on information theory as a &lt;em&gt;theory of learning.&lt;/em&gt; To read them you&amp;rsquo;ll need familiarity with elementary probability, but no other technical background. If you do read them, I&amp;rsquo;d love your feedback!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -11,6 +11,18 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>An Opinionated Introduction to Information Theory</title>
+      <link>/post/intro_information_theory/</link>
+      <pubDate>Fri, 25 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/intro_information_theory/</guid>
+      <description>&lt;p&gt;Information theory has been one of the cornerstones of my research methodology over the previous year. Many systems scientists use information concepts in their own work, but may not be familiar with the fundamentals of the theory. If you are curious about information theory, or if you would just like a refresher on the basics, then you may enjoy these &lt;a href=&#34;https://arxiv.org/abs/1708.07459&#34; target=&#34;_blank&#34;&gt;recently-posted notes&lt;/a&gt;, which are distilled from an informal seminar I led at Northeastern’s Network Science Institute this summer.&lt;/p&gt;
+
+&lt;p&gt;They aim to outline some elements of the information-theoretic “way of thinking,” by cutting a rapid and interesting path through some of the foundational concepts and theorems. The emphasis is on information theory as a &lt;em&gt;theory of learning.&lt;/em&gt; To read them you&amp;rsquo;ll need familiarity with elementary probability, but no other technical background. If you do read them, I&amp;rsquo;d love your feedback!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Student Testimonials</title>
       <link>/teaching_testimonials/</link>
       <pubDate>Thu, 24 Aug 2017 00:00:00 -0400</pubDate>
@@ -477,15 +489,6 @@
       <guid>/project/structure-segregation/</guid>
       <description>&lt;p&gt;Ethnoracial residential segregation is a complex, multiscalar phenomenon with immense moral and economic costs. Modeling the structure and dynamics of segregation are pressing problems for sociology and urban planning, but existing methods have limitations. In this paper, we develop a suite of methods, grounded in information theory, for studying the spatial structure of segregation. We first advance existing profile and decomposition methods by posing two related regionalization methods, which allow for profile curves with non-constant spatial scale and decomposition analysis with non-arbitrary areal units. We then formulate a measure of local spatial scale, which may be used for both detailed, within-city analysis and intercity comparisons. These methods highlight detailed insights in the structure and dynamics of urban segregation that would be otherwise easy to miss or difficult to quantify. They are computational efficient; applicable to a broad range of study questions; and freely available in open-source software.&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>compx</title>
-      <link>/project/compx/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/project/compx/</guid>
-      <description></description>
     </item>
     
   </channel>
