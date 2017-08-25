@@ -1,7 +1,7 @@
 ---
 title: "Why Fractal Cities?"
 author: "Phil"
-excerpt: "Population and urban infrastructure are consistently organized as fractals. Why is that? We survey two properties of fractals -- incremental growth and optimal transport -- and show how these two considerations naturally lead to fractal structure in human organization."
+summary: "Population and urban infrastructure are consistently organized as fractals. Why is that? We survey two properties of fractals -- incremental growth and optimal transport -- and show how these two considerations naturally lead to fractal structure in human organization."
 tags: [fractals, cities, theory]
 css: "green.css"
 date: 2017-03-21
