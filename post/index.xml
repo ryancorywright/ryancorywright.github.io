@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Math for Humans</title>
+    <link>/post/</link>
+    <description>Recent content in Posts on Math for Humans</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017 Phil Chodrow</copyright>
+    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/post/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Information Measures Segregation</title>
+      <link>/post/2017-06-19-info-segregation-2/</link>
+      <pubDate>Mon, 19 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017-06-19-info-segregation-2/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;/post/2017-03-06-info_segregation_1/&#34;&gt;Last time&lt;/a&gt;, we studied the information-theoretic idea of &lt;em&gt;entropy&lt;/em&gt; and its relationship to our intuitive concept of &lt;em&gt;diversity&lt;/em&gt;. We saw that the entropy &lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt; is highest precisely when all possible groups are represented equally in a population, and lowest when only one group is represented. High entropy, high diversity.&lt;/p&gt;
+&lt;p&gt;Now let’s move on to an information-theoretic view of &lt;em&gt;segregation&lt;/em&gt;. It’s important to remember that segregation is a fundamentally distinct concept from diversity. We can remind ourselves of this difference by recalling the example of the tea drinkers in the cafe. There are drinkers who prefer &lt;strong&gt;&lt;font color=&#34;#543005&#34;&gt;black&lt;/font&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;font color=&#34;#D73027&#34;&gt;red&lt;/font&gt;&lt;/strong&gt;, and &lt;strong&gt;&lt;font color=&#34;#A1D76A&#34;&gt;green&lt;/font&gt;&lt;/strong&gt; teas; on three different days, the population of the cafe looked like this:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-06-19-info-segregation-2_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;600px&#34; height=&#34;300px&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;We’re interested in whether or not the shop is &lt;em&gt;diverse&lt;/em&gt;, and whether or not it is &lt;em&gt;segregated&lt;/em&gt; (by room). Intuitively,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Friday&lt;/strong&gt; is neither diverse nor segregated.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Saturday&lt;/strong&gt; is diverse, but fairly unsegregated.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Sunday&lt;/strong&gt; is diverse but highly segregated.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As you may remember, the entropy &lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt; could distinguish Friday (&lt;span class=&#34;math inline&#34;&gt;\(H = 0\)&lt;/span&gt;) from Saturday and Sunday (&lt;span class=&#34;math inline&#34;&gt;\(H = 1.10\)&lt;/span&gt;), but couldn’t distinguish Saturday and Sunday from each other. For that we need more subtle ideas. Let’s dive in!&lt;/p&gt;
+&lt;div id=&#34;local-entropy&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Local Entropy&lt;/h1&gt;
+&lt;p&gt;One way to think about segregation is just to think about diversity again – but on a lower level of organization. To see this, compare Saturday and Sunday again, &lt;em&gt;within each room&lt;/em&gt;. Computing entropies for each of the three rooms individually, on each day, we have:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;Day&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Garden&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Left&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Right&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Friday&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Saturday&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.08&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.08&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Sunday&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Just as we’d expect, the entropies in the individual rooms are zero on Friday and Sunday, but high on Saturday, reflecting diversity in each room.&lt;/p&gt;
+&lt;p&gt;Mathematically, the entropy of each individual room is an example of &lt;em&gt;conditioned&lt;/em&gt; or &lt;em&gt;local&lt;/em&gt; entropy. To write this down, let’s allow &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt; to be a random variable denoting the tea preference of a randomly selected customer, and &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; be a random variable denoting where they sit in the cafe. Then, we can write the overall entropy as &lt;span class=&#34;math inline&#34;&gt;\(H(Y)\)&lt;/span&gt;, and the entropy of tea preferences conditioned on sitting in the garden as as &lt;span class=&#34;math inline&#34;&gt;\(H(Y \vert X = \text{garden})\)&lt;/span&gt;. The average value of the conditioned entropy across all rooms is important enough to have a special name: the &lt;em&gt;conditional entropy&lt;/em&gt;. We can write it as:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[H(Y\vert X) \triangleq \sum_{x \in \{\text{garden, left, right}\}} H(Y|X = x) \mathbb{P}(X = x)\;.\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;To calculate the conditional entropy, we compute the local entropy conditioned on each room, and then take a weighted average in which each room counts according to its “population.” This weighting is reflected in the factor &lt;span class=&#34;math inline&#34;&gt;\(\mathbb{P}(X = x)\)&lt;/span&gt;, which can be read as “the probability that a randomly selected patron is sitting in room &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;.” In our example, this is the same as the proportion of patrons in room &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;. Applying the formula above to the local entropies we calculated earlier, we have that &lt;span class=&#34;math inline&#34;&gt;\(H(Y\vert X) \approx 1.09\)&lt;/span&gt; on Saturday, and is zero on Friday and Sunday.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;mutual-information-measures-segregation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Mutual Information Measures Segregation&lt;/h1&gt;
+&lt;p&gt;Let’s summarise:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;Day&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Diverse&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Segregated&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;&lt;span class=&#34;math inline&#34;&gt;\(H(Y)\)&lt;/span&gt;&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;&lt;span class=&#34;math inline&#34;&gt;\(H(Y \vert X)\)&lt;/span&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Friday&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;No&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;No&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Saturday&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;Yes&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;No&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.09&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Sunday&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;Yes&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;Yes&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1.10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;A pattern is emerging: if diversity is measured by &lt;em&gt;high&lt;/em&gt; &lt;span class=&#34;math inline&#34;&gt;\(H(Y)\)&lt;/span&gt;, segregation is measured by &lt;em&gt;high&lt;/em&gt; &lt;span class=&#34;math inline&#34;&gt;\(H(Y)\)&lt;/span&gt; and &lt;em&gt;low&lt;/em&gt; &lt;span class=&#34;math inline&#34;&gt;\(H(Y \vert X)\)&lt;/span&gt;. The difference between &lt;span class=&#34;math inline&#34;&gt;\(H(Y)\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(H(Y \vert X)\)&lt;/span&gt; turns out to be a fundamental concept in information theory: the &lt;strong&gt;mutual information&lt;/strong&gt;, denoted &lt;span class=&#34;math inline&#34;&gt;\(I(X,Y)\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ I(X,Y) \triangleq H(Y) - H(Y \vert X) \;.\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Recall from last post that &lt;span class=&#34;math inline&#34;&gt;\(H(Y)\)&lt;/span&gt; measures the difficulty of a guessing game in which I try to match the preferences of the cafe customers. From our discussion above, we can think of &lt;span class=&#34;math inline&#34;&gt;\(H(Y\vert X)\)&lt;/span&gt; in similar terms: its the difficulty of a guessing game in which I try to match the preferences of customers in &lt;em&gt;in a single room.&lt;/em&gt; So, &lt;span class=&#34;math inline&#34;&gt;\(I(X,Y)\)&lt;/span&gt; can be interpreted as the (average) &lt;strong&gt;value of knowing which room I need to serve.&lt;/strong&gt; The value is high on Sunday: matching the preferences of the whole shop is hard (high entropy), but if you tell me which room I am serving, the problem is suddenly easy – I only need to accomodate one kind of customer. This phenomenon is measured by a high value of &lt;span class=&#34;math inline&#34;&gt;\(I(X,Y) = 1.10\)&lt;/span&gt;. On Saturday, however, matching the preferences of any individual room is about as hard as matching the preferences of the whole shop: both the entropy &lt;span class=&#34;math inline&#34;&gt;\(H(Y)\)&lt;/span&gt; and conditional entropy &lt;span class=&#34;math inline&#34;&gt;\(H(Y\vert X)\)&lt;/span&gt; are high, giving a low value of &lt;span class=&#34;math inline&#34;&gt;\(I(X,Y)\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Another natural way to say this is that knowing what room I am serving is highly &lt;em&gt;informative&lt;/em&gt; on Sunday, but not on Saturday. The mutual information measures exactly how informative that knowledge really is.&lt;/p&gt;
+&lt;p&gt;Let’s now cash out the role of the mutual information in the measurement of segregation. It’s possible to prove that the only case in which &lt;span class=&#34;math inline&#34;&gt;\(I(X,Y) = 0\)&lt;/span&gt; is perecisely the one in which each room has the same distribution of tea preferences as the shop generally. This obtains on Friday and Saturday, but not Sunday. Furthermore, &lt;span class=&#34;math inline&#34;&gt;\(I(X,Y)\)&lt;/span&gt; achieves its maximum value of &lt;span class=&#34;math inline&#34;&gt;\(H(Y)\)&lt;/span&gt; precisely when each room has just one kind of tea drinker: the Saturday scenario. The larger &lt;span class=&#34;math inline&#34;&gt;\(I(X,Y)\)&lt;/span&gt;, the greater role that your tea preference plays in determining what room you sit in.&lt;/p&gt;
+&lt;p&gt;Indeed, &lt;span class=&#34;math inline&#34;&gt;\(I(X,Y)\)&lt;/span&gt; turns out to be such a natural measure of segregation that it was reinvented in the sociological community some 25 years after Shannon’s seminal work founding information theory. The frequently used “Information Theory Index” of Theil and Finezza (1971)&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; is nothing more than &lt;span class=&#34;math inline&#34;&gt;\(I(X,Y) / H(Y)\)&lt;/span&gt;; the normalization by &lt;span class=&#34;math inline&#34;&gt;\(H(Y)\)&lt;/span&gt; results in a measure that takes values in &lt;span class=&#34;math inline&#34;&gt;\([0,1]\)&lt;/span&gt;. Formally, what &lt;span class=&#34;math inline&#34;&gt;\(I(X,Y)\)&lt;/span&gt; measures is &lt;em&gt;unevenness&lt;/em&gt;: the tendency of groups to be differently-distributed in space. Since Theil and Finezza, a number&lt;a href=&#34;#fn2&#34; class=&#34;footnoteRef&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; of methodologists&lt;a href=&#34;#fn3&#34; class=&#34;footnoteRef&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt; have formulated&lt;a href=&#34;#fn4&#34; class=&#34;footnoteRef&#34; id=&#34;fnref4&#34;&gt;&lt;sup&gt;4&lt;/sup&gt;&lt;/a&gt; a variety&lt;a href=&#34;#fn5&#34; class=&#34;footnoteRef&#34; id=&#34;fnref5&#34;&gt;&lt;sup&gt;5&lt;/sup&gt;&lt;/a&gt; of measures,&lt;a href=&#34;#fn6&#34; class=&#34;footnoteRef&#34; id=&#34;fnref6&#34;&gt;&lt;sup&gt;6&lt;/sup&gt;&lt;/a&gt; all of which can be viewed as normalized mutual informations.&lt;a href=&#34;#fn7&#34; class=&#34;footnoteRef&#34; id=&#34;fnref7&#34;&gt;&lt;sup&gt;7&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div id=&#34;mutual-information-measures-dependence&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Mutual Information Measures Dependence&lt;/h2&gt;
+&lt;p&gt;Readers with statistical background might read the above as a statement about dependence: &lt;span class=&#34;math inline&#34;&gt;\(I(X,Y)\)&lt;/span&gt; measures the degree of statistical association between room and tea preference. Let’s step back from the context of diversity for a moment to explore this point. To do this, let’s compare &lt;span class=&#34;math inline&#34;&gt;\(I(X,Y)\)&lt;/span&gt; to a more familiar quantity that does something similar: the correlation coefficient &lt;span class=&#34;math inline&#34;&gt;\(R^2\)&lt;/span&gt;. If you took a statistics class, you might remember linear regression, the problem of drawing a “best fit” line through a cloud of data plotted on the &lt;span class=&#34;math inline&#34;&gt;\(x-y\)&lt;/span&gt; plane. One thing you might have done was to compute “&lt;span class=&#34;math inline&#34;&gt;\(R^2\)&lt;/span&gt;,” which is more formally called the Pearson correlation coefficient. When &lt;span class=&#34;math inline&#34;&gt;\(R^2 = 1\)&lt;/span&gt;, the explanatory variable &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; is perfectly correlated with the explanandum &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;, but when &lt;span class=&#34;math inline&#34;&gt;\(R^2 = 0\)&lt;/span&gt;, there’s no linear relationship. One thing that might have been emphasized to you is:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(R^2 = 0\)&lt;/span&gt; does not imply that the variables &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt; are independent.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Here’s a &lt;a href=&#34;https://commons.wikimedia.org/wiki/File:Correlation_examples2.svg#/media/File:Correlation_examples2.svg&#34;&gt;set of examples&lt;/a&gt; that you can view on Wikipedia: the bottom row data sets are all uncorrelated (&lt;span class=&#34;math inline&#34;&gt;\(R^2 = 0\)&lt;/span&gt;), but clearly not independent.&lt;/p&gt;
+&lt;p&gt;The mutual information &lt;span class=&#34;math inline&#34;&gt;\(I(X,Y)\)&lt;/span&gt; is something like a correlation coefficient on steroids, in the sense that:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(I(X,Y) = 0\)&lt;/span&gt; &lt;strong&gt;does&lt;/strong&gt; imply that &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt; are independent.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;One nice thing about this result is that it actually makes precise an intuition about probabilistic dependence that many of us share: two variables are dependent if knowing one “gives you information” about the other. &lt;span class=&#34;math inline&#34;&gt;\(I(X,Y)\)&lt;/span&gt; quantifies this idea and makes it rigorously correct.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-fundamental-equation-of-segregation-and-diversity&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;The Fundamental Equation of Segregation and Diversity&lt;/h1&gt;
+&lt;p&gt;Returning to segregation and diversity, we’re ready to write out a lovely and simple equation relating diversity and segregation across spatial scales. Let’s go back to the definition of &lt;span class=&#34;math inline&#34;&gt;\(I(X,Y)\)&lt;/span&gt; above. Let’s recall first that &lt;span class=&#34;math inline&#34;&gt;\(H(Y)\)&lt;/span&gt; measures the diversity of the entire shop. Next, the conditional entropy &lt;span class=&#34;math inline&#34;&gt;\(H(Y|X)\)&lt;/span&gt; is a measure of average diversity in each room. In the context of segregation studies, &lt;span class=&#34;math inline&#34;&gt;\(H(Y|X)\)&lt;/span&gt; measures &lt;strong&gt;exposure&lt;/strong&gt; – the diversity that an individual experiences in their local environment. From my individual perspective, the diversity of the entire shop doesn’t matter – just the diversity of my immediate surroundings. Finally, as we discussed above, the mutual information &lt;span class=&#34;math inline&#34;&gt;\(I(X,Y)\)&lt;/span&gt; measures the segregation of the entire shop. If we take the definition of &lt;span class=&#34;math inline&#34;&gt;\(I(X,Y) = H(Y) - H(Y|X)\)&lt;/span&gt; and rearrange the terms, we wind up with what I think of as the fundamental equation of segregation and diversity:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\text{Global Diversity} = \text{Local Exposure} + \text{Global Segregation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;What’s striking about this equation is not surprise or complexity, but the way it so neatly organizes natural concepts into a quantitative order. The intuition here is simple: if there are many groups coexisting in a system (global diversity is high), then they must exist either in the same spaces (local exposure is high) or in difference spaces (global segregation is high). One of my favorite points about information theory is its ability to give precise quantitative formulations for common sense ideas about structure and learning; this equation is a prime example.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;whats-next&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;What’s Next&lt;/h1&gt;
+&lt;p&gt;Thanks to everyone who checked in for this two-part series! We covered the elements of an information-theoretic view of diversity and segregation. My aim in future posts is to discuss how to do practical computation with these measures. I’ll also discuss some of my research into how to analyze diversity and segregation at multiple spatial scales, and how to algorithmically find spatial structure in social systems.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;Theil, H., &amp;amp; Finezza, A. J. (1971). A note on the measurement of racial integration of schools by means of informational concepts. Taylor and Francis.&lt;a href=&#34;#fnref1&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;Reardon, S. F. (2008). Measures of Ordinal Segregation. In Y. Flückiger, S. F. Reardon, &amp;amp; J. Silber (Eds.), Occupational and Residential Segregation (Research on Economic Inequality, Volume 17) (pp. 129–155).&lt;a href=&#34;#fnref2&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;Reardon, S. F., &amp;amp; O’Sullivan, D. (2004). Measures of Spatial Segregation. Sociological Methodology, 34(1), 121–162. &lt;a href=&#34;http://doi.org/10.1111/j.0081-1750.2004.00150.x&#34; class=&#34;uri&#34;&gt;http://doi.org/10.1111/j.0081-1750.2004.00150.x&lt;/a&gt;&lt;a href=&#34;#fnref3&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn4&#34;&gt;&lt;p&gt;Reardon, S. F., &amp;amp; Firebaugh, G. (2002). Measures of multigroup segregation. Sociological Methodology, 32, 33–67. &lt;a href=&#34;http://doi.org/10.1111/1467-9531.00110&#34; class=&#34;uri&#34;&gt;http://doi.org/10.1111/1467-9531.00110&lt;/a&gt;&lt;a href=&#34;#fnref4&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn5&#34;&gt;&lt;p&gt;Jargowsky, P. A., &amp;amp; Kim, J. (2005). A measure of spatial segregation: The generalized neighborhood sorting index. National Poverty Center Working Paper Series. Retrieved from &lt;a href=&#34;http://nationalpovertycenter.net/publications/workingpaper05/paper03/jargowsky_kim_21mar2005.pdf&#34; class=&#34;uri&#34;&gt;http://nationalpovertycenter.net/publications/workingpaper05/paper03/jargowsky_kim_21mar2005.pdf&lt;/a&gt;&lt;a href=&#34;#fnref5&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn6&#34;&gt;&lt;p&gt;Roberto, E. (2015). Measuring Inequality and Segregation. arXiv.org, 1–26. Retrieved from &lt;a href=&#34;http://arxiv.org/abs/1508.01167&#34; class=&#34;uri&#34;&gt;http://arxiv.org/abs/1508.01167&lt;/a&gt;&lt;a href=&#34;#fnref6&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn7&#34;&gt;&lt;p&gt;Roberto, E. (2016). The Spatial Context of Residential Segregation. arXiv.org, 1–27.&lt;a href=&#34;#fnref7&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Entropy Measures Diversity</title>
+      <link>/post/2017-03-06-info_segregation_1/</link>
+      <pubDate>Mon, 06 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017-03-06-info_segregation_1/</guid>
+      <description>&lt;p&gt;My current research develops the mathematics of information theory to study segregation in cities. It might not be obvious that this is a logical thing to do. The study of segregation isn’t usually viewed as an inference or communication engineering problem, and therefore doesn’t get much attention from information theorists and statisticians. On the other hand, sociological researchers in quantitative segregation studies do use information-theoretic measures, but tend to be less concerned about the mathematical subtleties. My goal in this series of blog posts is to develop information theory from the ground up as an &lt;em&gt;organizing framework&lt;/em&gt; for thinking about segregation. This framework both makes explicit the logic of some of our intuitive thinking about segregation, and also points the way to a wide vista of important extensions, generalizations, and applications. A mathematician can’t ask for much more than that!&lt;/p&gt;
+&lt;p&gt;Broadly, this sequence of posts will cover the following topics:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;An &lt;strong&gt;elementary development of information theory&lt;/strong&gt; in the context of categorical segregation. Our main focus will be on the entropy, conditional entropy, and mutual information, and what they mean in this context. We’ll ultimately develop a rather beautiful equation that organizes a few key concepts in segregation studies:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\text{Global Diversity} = \text{Local Exposure} + \text{Global Segregation}\]&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A &lt;strong&gt;computational interlude&lt;/strong&gt;, where we’ll check out how to study spatial segregation in &lt;code&gt;R&lt;/code&gt;, using some of the theory we learned above.&lt;/li&gt;
+&lt;li&gt;A &lt;strong&gt;return to theory&lt;/strong&gt;, where we’ll generalize our categorical measures to handle ordinal and partially ordinal variables.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;What mathematical background do you need to get the most out of this series? I won’t be assuming any prior knowledge of information theory, although it certainly doesn’t hurt.&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; You’ll need elementary probability theory – concepts like conditional probabilities and expectation values will be enough. Things will ramp up a bit in mathematical complexity when we get to part 3, but a bit of calculus and fearlessness will be enough to see us through.&lt;/p&gt;
+&lt;p&gt;All that said, let’s talk about entropy! First we’ll set up a little toy scenario to analyze. This scenario is going to stick with us in our little adventure through information theory.&lt;/p&gt;
+&lt;div id=&#34;the-setting&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;The Setting&lt;/h1&gt;
+&lt;p&gt;They say to write what you love, and what I love is tea. Back in my hometown, there’s a great cafe that I used to haunt endlessly in my high school days. The cafe has two main rooms, plus an outdoor garden out back. Schematically, it looks something like this:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-03-06-info_segregation_1_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;250px&#34; height=&#34;250px&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Let’s say the cafe serves just three beverages, all of them different kinds of tea: &lt;strong&gt;&lt;font color=&#34;#543005&#34;&gt;black&lt;/font&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;font color=&#34;#D73027&#34;&gt;red&lt;/font&gt;&lt;/strong&gt;, and &lt;strong&gt;&lt;font color=&#34;#A1D76A&#34;&gt;green&lt;/font&gt;&lt;/strong&gt;.&lt;a href=&#34;#fn2&#34; class=&#34;footnoteRef&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; This being a popular establishment, on any given day, the rooms are full of folks drinking tea. On three different days last week, the shop looked like this:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-03-06-info_segregation_1_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;600px&#34; height=&#34;300px&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Each little square represents a person; there are &lt;span class=&#34;math inline&#34;&gt;\(6\times 6 = 36\)&lt;/span&gt; customers in the shop on both days. On Friday, we had an overwhelming wave of green tea fanatics, who left no room for drinkers of any other preferences in the shop. On Saturday, each of the three tea preferences was equally represented, and folks spread themselves throughout the shop more-or-less randomly. On Sunday, the three main tea preferences were again evenly represented, but they were cliquey–folks tended to sit in the same room as people who shared their tea preferences.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;diversity-and-segregation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Diversity and Segregation&lt;/h1&gt;
+&lt;p&gt;We’d like to use the tea shop to explore mathematical questions of &lt;em&gt;diversity&lt;/em&gt; and &lt;em&gt;segregation.&lt;/em&gt; Intuitively,&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;strong&gt;Diversity&lt;/strong&gt; is high when all kinds of tea drinkers (black, red, and green) are well-represented.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Segregation&lt;/strong&gt; is high when different kinds of tea drinkers tend to occupy different rooms.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;These ideas are simple, but the same fundamental patterns hold for more high-stakes issues: diversity is high when all genders are well-represented in the workforce, and and segregation is high when people of different genders tend to have different occupations. Diversity is high when many ethnic groups are present in a neighborhood, but segregation is high if children in different groups tend to attend different schools. This all might seem simple enough, but the whole point of mathematics is that thinking deeply about simple ideas can lead us to new insights. With that in mind, let’s reflect on these simple ideas from an advanced point of view.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-guessing-game&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;The Guessing Game&lt;/h1&gt;
+&lt;p&gt;You are the manager of the cafe, and I am your assistant. Unfortunately, we ran out of tea today, but I have just enough time to run to our local supplier to restock. I assume that we serve 36 customers in a day, so the only question is how much of each tea I should buy. You are a performance-based manager, and so you reward me based on how well the proportions of tea I bought match the customer’s preferences. Before I run out, I scan the room to see who our customers are: based on what they’ve ordered before, I know that the proportions of tea drinkers are &lt;span class=&#34;math inline&#34;&gt;\(P_{black} = p_1\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(P_{green} = p_2\)&lt;/span&gt;, and &lt;span class=&#34;math inline&#34;&gt;\(P_{red} = p_3\)&lt;/span&gt;. For example, of all the customers, &lt;span class=&#34;math inline&#34;&gt;\(100 \times p_2\)&lt;/span&gt; percent of them prefer green tea. Assuming we don’t sell any other kinds of tea, it must hold that &lt;span class=&#34;math inline&#34;&gt;\(p_1 + p_2 + p_3 = 1\)&lt;/span&gt;, and further that &lt;span class=&#34;math inline&#34;&gt;\(p_i \geq 0\)&lt;/span&gt; for each &lt;span class=&#34;math inline&#34;&gt;\(i = 1,\ldots,3\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;I need to buy some tea, in proportions &lt;span class=&#34;math inline&#34;&gt;\(\hat{p}_1\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\hat{p}_2\)&lt;/span&gt;, and &lt;span class=&#34;math inline&#34;&gt;\(\hat{p}_3\)&lt;/span&gt;. What are the best proportions I should choose? It’s tempting to say that I should choose &lt;span class=&#34;math inline&#34;&gt;\(\hat{p} = p\)&lt;/span&gt; – that is, I should choose the proportions of tea I buy to perfectly reflect our customer preferences That’s not wrong, but it’s important to understand why. And, as in all things, the reason why hinges on how you, my performance-based manager, are paying me.&lt;/p&gt;
+&lt;p&gt;Since you’re paying me based on performance, my pay should be a function &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; of &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; – the actual state of the world – and &lt;span class=&#34;math inline&#34;&gt;\(\hat{p}\)&lt;/span&gt; – my action. That is, if the true proportions of customers are given by &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; and I come back with &lt;span class=&#34;math inline&#34;&gt;\(\hat{p}\)&lt;/span&gt; proportions of black, red, and green teas, then you will pay me &lt;span class=&#34;math inline&#34;&gt;\(f(p, \hat{p})\)&lt;/span&gt;. Somewhat surprisingly, it turns out that there’s only one payment function that encourages me to both (a) act on my true beliefs about what our customers will most enjoy and (b) rewards me based only on how well my action matched the customers we actually had, not the customers we “might have had.”&lt;a href=&#34;#fn3&#34; class=&#34;footnoteRef&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt; This is the &lt;em&gt;negative cross-entropy&lt;/em&gt;:&lt;a href=&#34;#fn4&#34; class=&#34;footnoteRef&#34; id=&#34;fnref4&#34;&gt;&lt;sup&gt;4&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ f(p, \hat{p}) \triangleq \sum_i p_i \log \hat{p}_i\;.\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Earlier, we had an intuition that the best thing for me to do was to pick proportions that match our customer preferences, that is, pick &lt;span class=&#34;math inline&#34;&gt;\(\hat{p} = p\)&lt;/span&gt;. This turns out to be correct: &lt;strong&gt;Claim:&lt;/strong&gt; &lt;em&gt;The true customer proportions maximize the negative cross entropy reward function. Formally,&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[p = \text{argmax}_{\hat{p}} f(p, \hat{p})\;.\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Proof:&lt;/em&gt; There are lots of ways to show this standard fact, but let’s do a simple calculation with Lagrange multipliers. First, we’ll need the gradient of &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; with respect to the components of &lt;span class=&#34;math inline&#34;&gt;\(\hat{p}\)&lt;/span&gt;, which we calculate as:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \nabla_\hat{p}f(p, \hat{p}) = \left(\frac{p_1}{\hat{p}_1},\cdots, \frac{p_n}{\hat{p}_n}\right)^T\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;The Lagrange multipliers come from the constraint that &lt;span class=&#34;math inline&#34;&gt;\(g(\hat{p}) \triangleq \sum_i \hat{p}_i = 1\)&lt;/span&gt;. The gradient of the constraint function is just&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\nabla_{\hat{p}}  g(\hat{p})  = \underbrace{(1,\ldots,1)^T}_{n \text{ copies}}\;.\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;The method of Lagrange multipliers now requires that we find values of &lt;span class=&#34;math inline&#34;&gt;\(\hat{p}\)&lt;/span&gt; and some constant &lt;span class=&#34;math inline&#34;&gt;\(\lambda \neq 0\)&lt;/span&gt; that make the gradients collinear:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{align} 
+    \nabla_\hat{p}f(p, \hat{p}) + \lambda \nabla_{\hat{p}}  g(\hat{p}) &amp;amp;= 0 \\ 
+    g(\hat{p}) &amp;amp;= 1\;.
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;As usual, this is a system of &lt;span class=&#34;math inline&#34;&gt;\(n+1\)&lt;/span&gt; equations in &lt;span class=&#34;math inline&#34;&gt;\(n+1\)&lt;/span&gt; unknowns (the components of &lt;span class=&#34;math inline&#34;&gt;\(\hat{p}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\lambda\)&lt;/span&gt;), so under reasonable regularity assumptions we expect a unique solution. Solving the first &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; equations show that &lt;span class=&#34;math inline&#34;&gt;\(\frac{p_i}{\hat{p}_i} = \frac{p_j}{\hat{p}_j}\)&lt;/span&gt; for all &lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(j\)&lt;/span&gt;, and the constraint implies that &lt;span class=&#34;math inline&#34;&gt;\(\frac{\hat{p}_i}{p_i} = 1\)&lt;/span&gt;, or &lt;span class=&#34;math inline&#34;&gt;\(\hat{p}_i = p_i\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Are we done? Well, technically no: all we’ve shown is that &lt;span class=&#34;math inline&#34;&gt;\(\hat{p} = p\)&lt;/span&gt; is a &lt;em&gt;critical point&lt;/em&gt; of &lt;span class=&#34;math inline&#34;&gt;\(f(p,\hat{p})\)&lt;/span&gt;. For full rigor, what we should show next is that (a) this point is the &lt;em&gt;only&lt;/em&gt; critical point and that (b) this point is indeed a local maximum. Both of these facts follow directly from the fact that &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; is &lt;em&gt;strictly concave&lt;/em&gt; as a function of &lt;span class=&#34;math inline&#34;&gt;\(\hat{p}\)&lt;/span&gt;. We’ll get into issues of concavity and convexity when we discuss generalizing diversity measures with Bregman divergences in a subsequent post.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Summing up from this section:&lt;/strong&gt; we played a “guessing game,” in which I tried to pick a distribution over tea types &lt;strong&gt;&lt;font color=&#34;#543005&#34;&gt;black&lt;/font&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;font color=&#34;#D73027&#34;&gt;red&lt;/font&gt;&lt;/strong&gt;, and &lt;strong&gt;&lt;font color=&#34;#A1D76A&#34;&gt;green&lt;/font&gt;&lt;/strong&gt; that would maximize my paycheck from you, my manager – which was in turn dependent on my performance as evaluated by the negative cross entropy. We proved that my best approach was to pick the distribution over tea types that perfectly mirrors the distribution over customers in the shop. Wasn’t that a fun game?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;entropy-measures-diversity&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Entropy Measures Diversity&lt;/h1&gt;
+&lt;p&gt;An important consequence of our result is that we can define the &lt;em&gt;optimal reward function&lt;/em&gt; in terms of &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; alone. This function is so important that it has a name: it’s negative (Shannon) &lt;em&gt;entropy&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ H(p) \triangleq - \max_\hat{p} f(p, \hat{p}) = - \sum_i p_i \log p_i \;.\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Intuitively, the entropy measures how “hard” the guessing game is: when &lt;span class=&#34;math inline&#34;&gt;\(H(p)\)&lt;/span&gt; is high, my reward in the guessing game is low, &lt;em&gt;even when I make the best possible choice of &lt;span class=&#34;math inline&#34;&gt;\(\hat{p}\)&lt;/span&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Now, what makes the guessing game hard? The answer is: diversity! To see this, let’s check on a few properties of &lt;span class=&#34;math inline&#34;&gt;\(H(p)\)&lt;/span&gt;. First, suppose that &lt;span class=&#34;math inline&#34;&gt;\(p = (1,0,0,\ldots)\)&lt;/span&gt;, that is, there’s only one type of tea drinker in the cafe. Then, take a moment to convince yourself that &lt;span class=&#34;math inline&#34;&gt;\(H(p) = 0\)&lt;/span&gt;.&lt;a href=&#34;#fn5&#34; class=&#34;footnoteRef&#34; id=&#34;fnref5&#34;&gt;&lt;sup&gt;5&lt;/sup&gt;&lt;/a&gt; It’s easy to see that &lt;span class=&#34;math inline&#34;&gt;\(H(p)\)&lt;/span&gt; is nonnegative for any &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;, so the single-tea-type cafe is an entropy minimizer. What distribution over tea types is an entropy maximizer? It’s a good exercise to do a Lagrange multiplier analysis similar to the one above to prove the following theorem:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Theorem:&lt;/strong&gt; &lt;em&gt;The entropy is maximized by the uniform distribution. Formally, &lt;span class=&#34;math inline&#34;&gt;\(u = \text{argmax}_p H(p)\)&lt;/span&gt;, where &lt;span class=&#34;math inline&#34;&gt;\(u\)&lt;/span&gt; is the uniform distribution on &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; categories: &lt;span class=&#34;math inline&#34;&gt;\(u = \left( \frac{1}{n},\cdots,\frac{1}{n} \right)\)&lt;/span&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Summing up what we just learned, the entropy &lt;span class=&#34;math inline&#34;&gt;\(H(p)\)&lt;/span&gt; is function of the customers in the cafe that determines how hard it is for me to succeed at the guessing game. The entropy is lowest (the game is easiest) when all customers prefer the same kind of tea, that is, when diversity is minimized. The entropy is highest (the game is hardest) when different tea preferences are represented in equal proportions, that is, when diversity is maximized. In summary, &lt;strong&gt;the entropy &lt;span class=&#34;math inline&#34;&gt;\(H\)&lt;/span&gt; is a measure of diversity. It is high when diversity is high, and low when diversity is low.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Let’s wrap up by calculating the entropies for the cafe customers on Friday, Saturday and Sunday cafe. In case you’ve forgotten, they looked like this:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2017-03-06-info_segregation_1_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;600px&#34; height=&#34;300px&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;On Friday, only one tea preference (green) is represented, and so &lt;span class=&#34;math inline&#34;&gt;\(H(p) = 0\)&lt;/span&gt;. On both Saturday and Sunday, since each tea preference is equally represented on both days, &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; is the uniform distribution: &lt;span class=&#34;math inline&#34;&gt;\(p = \left(\frac{1}{3}, \frac{1}{3}, \frac{1}{3} \right)\)&lt;/span&gt;. In this case, we have &lt;span class=&#34;math inline&#34;&gt;\(H(p) = \log 3 \approx 1.10\)&lt;/span&gt;, the highest possible entropy in a world of just three types of tea drinkers. In summary, Friday had minimal diversity of tea drinkers; Saturday and Sunday had maximal diversity. Notice what the entropy &lt;strong&gt;doesn’t&lt;/strong&gt; capture: the difference between Saturday and Sunday. This reflects the fact that &lt;em&gt;segregation&lt;/em&gt; is a fundamentally different idea to &lt;em&gt;diversity.&lt;/em&gt; We’ll see how to think about this mathematically in the next post.&lt;/p&gt;
+&lt;p&gt;Thanks for reading!&lt;/p&gt;
+&lt;hr /&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;If you’d like to learn more about about information theory, check out Colah’s fantastic blog post, &lt;a href=&#34;https://colah.github.io/posts/2015-09-Visual-Information/&#34;&gt;Visual Information Theory&lt;/a&gt;. That post focuses more on the inferential framework than I will today, but is an all-around fantastic resource.&lt;a href=&#34;#fnref1&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;With apologies to all white and oolong drinkers. Chamomile, tough.&lt;a href=&#34;#fnref2&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;Technically, these conditions are that the reward function is &lt;em&gt;proper&lt;/em&gt; and &lt;em&gt;local.&lt;/em&gt; For further discussion about these ideas, you can check out &lt;a href=&#34;https://arxiv.org/pdf/1101.5011.pdf&#34;&gt;this paper&lt;/a&gt;, which also anticipates some elements of our further discussion in the context of scoring with Bregman divergences.&lt;a href=&#34;#fnref3&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn4&#34;&gt;&lt;p&gt;Astute readers will notice that &lt;span class=&#34;math inline&#34;&gt;\(f(p, \hat{p}) \leq 0\)&lt;/span&gt; for all &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\hat{p}\)&lt;/span&gt;; that is, I’m talking about being paid negative dollars. If this makes you uncomfortable, imagine instead that you are docking my pay by &lt;span class=&#34;math inline&#34;&gt;\(-f(p, \hat{p})\)&lt;/span&gt;, so that I am docked less the more accurate I am.&lt;a href=&#34;#fnref4&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn5&#34;&gt;&lt;p&gt;We are using the convention that &lt;span class=&#34;math inline&#34;&gt;\(0 \times \log 0 = 0\)&lt;/span&gt;.&lt;a href=&#34;#fnref5&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Computing in Optimization and Statistics, 2017</title>
+      <link>/post/2017-02-07-cos_2017_post/</link>
+      <pubDate>Tue, 07 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017-02-07-cos_2017_post/</guid>
+      <description>&lt;p&gt;Last month, I had the pleasure to co-organize an Independent Activities Period (J-term) course on Computing in Optimization and Statistics, course number 15.S60. What&amp;rsquo;s great about 15.S60 is that it&amp;rsquo;s entirely run and taught by grad student volunteers, just for the fun and satisfaction of sharing expertise with their peers. As you&amp;rsquo;d expect, the students who are motivated to do this are friendly, thoughtful, and love teaching &amp;ndash; it was a huge pleasure to work with them.&lt;/p&gt;
+
+&lt;p&gt;Each year, we aim to cover software tools and topics that will of use to a wide range of practicing researchers in applied math, computer science, operations research, and computational engineering. Along the way, we aim to promote free and open source software (FOSS) tools in computational science when appropriate. Toward these aims, we&amp;rsquo;ve gradually evolved a four-part course sequence:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Introductory Computing Skills (session 1)&lt;/li&gt;
+&lt;li&gt;Data Science in R (sessions 2-4)&lt;/li&gt;
+&lt;li&gt;Optimization with Julia and JuMP (sessions 5-6)&lt;/li&gt;
+&lt;li&gt;Additional Topics (sessions 7-8)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This year, the &amp;ldquo;additional topics&amp;rdquo; were operations research in Excel and deep learning with Python and TensorFlow.&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re interested in learning more about these topics, I encourage you to check out our &lt;a href=&#34;https://philchodrow.github.io/cos_2017/&#34; target=&#34;_blank&#34;&gt;course website&lt;/a&gt;, where you can see summaries of each session and access all our course materials for free.&lt;/p&gt;
+
+&lt;p&gt;Many thanks to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;My co-organizer&lt;/strong&gt;, Brad Sturt.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Our instructors&lt;/strong&gt;: Jackie Baek, Steve Morse, Clark Pixton, Colin Pawlowski, Seb Martin, Joey Huchette, Miles Lubin, Yee Sian Ng, Charlie Thraves, and Eli Gutin.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Thanks ICERM! (Predictive Policing)</title>
+      <link>/post/2016-08-14-thanks_icerm/</link>
+      <pubDate>Sun, 14 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2016-08-14-thanks_icerm/</guid>
+      <description>&lt;p&gt;Last week, Marta and I had the great privilege to serve as group leaders for a team researching spatial crime networks as part of ICERM&amp;rsquo;s workshop on Predictive Policing. We are grateful to ICERM, the Providence Police Department, Jeff Brantingham, Martin Short, and our group &amp;ndash; Haiyan, Chuntian, Matt, and Monica!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Slides and Exercises for RMarkdown</title>
+      <link>/post/2016-06-23-rmarkdown_slides/</link>
+      <pubDate>Thu, 23 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2016-06-23-rmarkdown_slides/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://rmarkdown.rstudio.com/&#34; target=&#34;_blank&#34;&gt;R Markdown&lt;/a&gt; is an authoring tool for easily sharing reproducible data analysis. If you are learning to use R Markdown, you may be interested in my recent &lt;a href=&#34;/resources/rmarkdown/rmarkdown.html&#34;&gt;slides&lt;/a&gt;  and (download links) &lt;a href=&#34;/resources/rmarkdown/ex1_skeleton.Rmd&#34;&gt;accompanying&lt;/a&gt; &lt;a href=&#34;/resources/rmarkdown/dash_example.Rmd&#34;&gt;exercises&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Slides and Exercises for ggplot2</title>
+      <link>/post/2016-06-08-ggplot2_slides/</link>
+      <pubDate>Wed, 08 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2016-06-08-ggplot2_slides/</guid>
+      <description>&lt;p&gt;The &lt;a href=&#34;http://ggplot2.org/&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;ggplot2&lt;/code&gt;&lt;/a&gt; package for the &lt;code&gt;R&lt;/code&gt; programming language is the best software in the world for 2-D data visualization. If you are new to &lt;code&gt;ggplot2&lt;/code&gt;, you may be interested in a set of simple &lt;a href=&#34;/resources/ggplot2/ggplot2.html&#34;&gt;slides&lt;/a&gt; I wrote, and (download links) the accompanying &lt;a href=&#34;/resources/ggplot2/dash_example.Rmd&#34;&gt;exercises&lt;/a&gt; in the R Markdown format.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

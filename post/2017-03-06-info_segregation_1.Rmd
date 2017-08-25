@@ -1,0 +1,178 @@
+---
+title: "Entropy Measures Diversity" 
+author: phil
+tags: [r, information theory, research]
+date: 2017-03-06
+summary: "A first adventure in measuring diversity and segregation using concepts from information theory. (Information Theory and Segregation, Part 1)"
+---
+
+My current research develops the mathematics of information theory to study segregation in cities. It might not be obvious that this is a logical thing to do. The study of segregation isn't usually viewed as an inference or communication engineering problem, and therefore doesn't get much attention from information theorists and statisticians. On the other hand, sociological researchers in quantitative segregation studies do use information-theoretic measures, but tend to be less concerned about the mathematical subtleties. My goal in this series of blog posts is to develop information theory from the ground up as an *organizing framework* for thinking about segregation. This framework both makes explicit the logic of some of our intuitive thinking about segregation, and also points the way to a wide vista of important extensions, generalizations, and applications. A mathematician can't ask for much more than that! 
+
+Broadly, this sequence of posts will cover the following topics: 
+
+- An **elementary development of information theory** in the context of categorical segregation. Our main focus will be on the entropy, conditional entropy, and mutual information, and what they mean in this context. We'll ultimately develop a rather beautiful equation that organizes a few key concepts in segregation studies: 
+
+$$\text{Global Diversity} = \text{Local Exposure} + \text{Global Segregation}$$
+
+- A **computational interlude**, where we'll check out how to study spatial segregation in `R`, using some of the theory we learned above. 
+- A **return to theory**, where we'll generalize our categorical measures to handle ordinal and partially ordinal variables. 
+
+What mathematical background do you need to get the most out of this series? I won't be assuming any prior knowledge of information theory, although it certainly doesn't hurt.[^1] You'll need elementary probability theory -- concepts like conditional probabilities and expectation values will be enough. Things will ramp up a bit in mathematical complexity when we get to part 3, but a bit of calculus and fearlessness will be enough to see us through. 
+
+```{r, echo = FALSE}
+philhelm::blog_opts(fig.align = 'center')
+```
+
+All that said, let's talk about entropy! First we'll set up a little toy scenario to analyze. This scenario is going to stick with us in our little adventure through information theory. 
+
+# The Setting
+
+They say to write what you love, and what I love is tea. Back in my hometown, there's a great cafe that I used to haunt endlessly in my high school days. The cafe has two main rooms, plus an outdoor garden out back. Schematically, it looks something like this: 
+
+```{r, out.height = '250px', out.width = '250px'}
+library(tidyverse)
+library(ggthemes)
+labels <- data_frame(x = c(1.5, 4.5, 3),
+					 y = c(2, 2, 5),
+					 label = c("Left Room", "Right Room", "Garden"))
+
+shop <- data_frame(room = c('left', 'right', 'garden'), 
+		   xmin = c(0, 3, 0) ,
+		   xmax = c(3, 6, 6),
+		   ymin = c(0, 0, 4), 
+		   ymax = c(4, 4, 6))
+
+shop %>% 
+	ggplot() + 
+	geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),alpha = 0, size = 4, color = 'grey40') + 
+	ggthemes::theme_map() + 
+	geom_text(aes(x, y, label = label), data = labels, size = 10, color = 'grey40') + 
+	ggthemes::theme_map() 
+```
+
+Let's say the cafe serves just three beverages, all of them different kinds of tea:  **<font color="#543005">black</font>**,  **<font color="#D73027">red</font>**, and **<font color="#A1D76A">green</font>**.[^2] This being a popular establishment, on any given day, the rooms are full of folks drinking tea. On three different days last week, the shop looked like this: 
+
+```{r, fig.height = 3, fig.width = 6, out.height = '300px', out.width = '600px'}
+set.seed(1298)
+
+tea_palette <- c(RColorBrewer::brewer.pal(name = 'BrBG', n = 11)[1], # deep brown
+				 RColorBrewer::brewer.pal(name = 'PiYG', n = 3)[3],
+				 RColorBrewer::brewer.pal(name = 'RdYlBu', n = 9)[1] # red
+				 )   # green
+
+selection <- data_frame(color = factor(c('Black', 'Red', 'Green')),
+						x = 1:3, 
+						text_color = c('#ffffff', '#262626', '#262626'))
+
+seg_teas <- data_frame(room = c('left', 'right', 'garden'), 
+					   tea = c('Black', 'Red', 'Green'))
+
+available_teas <- rep(selection$color, 12)
+
+shop_patrons <- expand.grid(x = 1:6, 
+						    y = 1:6) %>% 
+	tbl_df() %>% 
+	mutate(room = ifelse(y > 4, 'garden', 'left'),
+		   room = ifelse(x > 3 & y <= 4 , 'right', room),
+		   Friday = 'Green',
+		   Saturday = sample(available_teas, replace = F, size = nrow(.))) %>% 
+	left_join(seg_teas, by = c('room' = 'room')) %>% 
+	rename(Sunday = tea) %>% 
+	gather(key = day, value = tea, -x, -y, -room)
+
+g <- shop_patrons %>% 
+	ggplot() + 
+	geom_rect(aes(xmin = x-1, xmax = x, ymin = y-1, ymax = y, fill = tea)) + 
+	facet_wrap(~day) + 
+	geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),alpha = 0, size = 2, color = 'grey40', data = shop) + 
+	ggthemes::theme_map() + 
+	scale_fill_manual(values = tea_palette) + 
+	theme(legend.position = 'bottom',
+		  strip.background = element_blank(),
+		  legend.title = element_blank(),
+		  strip.text = element_text(size = 12),
+		  legend.justification = c(.5, 0),
+		  legend.text = element_text(size = 12))
+
+list(tea_palette, shop_patrons, seg_teas) %>% saveRDS('tea_shop.rds')
+
+g
+```
+
+Each little square represents a person; there are $6\times 6 = 36$ customers in the shop on both days. On Friday, we had an overwhelming wave of green tea fanatics, who left no room for drinkers of any other preferences in the shop. On Saturday, each of the three tea preferences was equally represented, and folks spread themselves throughout the shop more-or-less randomly. On Sunday, the three main tea preferences were again evenly represented, but they were cliquey--folks tended to sit in the same room as people who shared their tea preferences. 
+
+# Diversity and Segregation 
+
+We'd like to use the tea shop to explore mathematical questions of *diversity* and *segregation.* Intuitively, 
+
+1. **Diversity** is high when all kinds of tea drinkers (black, red, and green) are well-represented. 
+2. **Segregation** is high when different kinds of tea drinkers tend to occupy different rooms. 
+
+These ideas are simple, but the same fundamental patterns hold for more high-stakes issues: diversity is high when all genders are well-represented in the workforce, and and segregation is high when people of different genders tend to have different occupations. Diversity is high when many ethnic groups are present in a neighborhood, but segregation is high if children in different groups tend to attend different schools. This all might seem simple enough, but the whole point of mathematics is that thinking deeply about simple ideas can lead us to new insights. With that in mind, let's reflect on these simple ideas from an advanced point of view. 
+
+# The Guessing Game
+
+You are the manager of the cafe, and I am your assistant. Unfortunately, we ran out of tea today, but I have just enough time to run to our local supplier to restock. I assume that we serve 36 customers in a day, so the only question is how much of each tea I should buy. You are a performance-based manager, and so you reward me based on how well the proportions of tea I bought match the customer's preferences. Before I run out, I scan the room to see who our customers are: based on what they've ordered before, I know that the proportions of tea drinkers are $P_{black} = p_1$, $P_{green} = p_2$, and $P_{red} = p_3$. For example, of all the customers, $100 \times p_2$ percent of them prefer green tea. Assuming we don't sell any other kinds of tea, it must hold that $p_1 + p_2 + p_3 = 1$, and further that $p_i \geq 0$ for each $i = 1,\ldots,3$. 
+
+I need to buy some tea, in proportions $\hat{p}_1$, $\hat{p}_2$, and $\hat{p}_3$. What are the best proportions I should choose? It's tempting to say that I should choose $\hat{p} = p$ -- that is, I should choose the proportions of tea I buy to perfectly reflect our customer preferences That's not wrong, but it's important to understand why. And, as in all things, the reason why hinges on how you, my performance-based manager, are paying me. 
+
+Since you're paying me based on performance, my pay should be a function $f$ of $p$ -- the actual state of the world -- and $\hat{p}$ -- my action. That is, if the true proportions of customers are given by $p$ and I come back with $\hat{p}$ proportions of black, red, and green teas, then you will pay me $f(p, \hat{p})$. Somewhat surprisingly, it turns out that there's only one payment function that encourages me to both (a) act on my true beliefs about what our customers will most enjoy and (b) rewards me based only on how well my action matched the customers we actually had, not the customers we "might have had."[^3] This is the *negative cross-entropy*:[^4] 
+
+$$ f(p, \hat{p}) \triangleq \sum_i p_i \log \hat{p}_i\;.$$
+
+Earlier, we had an intuition that the best thing for me to do was to pick proportions that match our customer preferences, that is, pick $\hat{p} = p$. This turns out to be correct: 
+**Claim:** *The true customer proportions maximize the negative cross entropy reward function. Formally,*
+
+$$p = \text{argmax}_{\hat{p}} f(p, \hat{p})\;.$$
+
+*Proof:* There are lots of ways to show this standard fact, but let's do a simple calculation with Lagrange multipliers. First, we'll need the gradient of $f$ with respect to the components of $\hat{p}$, which we calculate as:
+
+$$ \nabla_\hat{p}f(p, \hat{p}) = \left(\frac{p_1}{\hat{p}_1},\cdots, \frac{p_n}{\hat{p}_n}\right)^T$$ 
+
+The Lagrange multipliers come from the constraint that $g(\hat{p}) \triangleq \sum_i \hat{p}_i = 1$. The gradient of the constraint function is just 
+
+$$\nabla_{\hat{p}}  g(\hat{p})  = \underbrace{(1,\ldots,1)^T}_{n \text{ copies}}\;.$$
+
+The method of Lagrange multipliers now requires that we find values of $\hat{p}$ and some constant $\lambda \neq 0$ that make the gradients collinear: 
+
+$$\begin{align} 
+	\nabla_\hat{p}f(p, \hat{p}) + \lambda \nabla_{\hat{p}}  g(\hat{p}) &= 0 \\ 
+	g(\hat{p}) &= 1\;.
+\end{align}$$
+
+As usual, this is a system of $n+1$ equations in $n+1$ unknowns (the components of $\hat{p}$ and $\lambda$), so under reasonable regularity assumptions we expect a unique solution. Solving the first $n$ equations show that $\frac{p_i}{\hat{p}_i} = \frac{p_j}{\hat{p}_j}$ for all $i$ and $j$, and the constraint implies that $\frac{\hat{p}_i}{p_i} = 1$, or $\hat{p}_i = p_i$.  
+
+Are we done? Well, technically no: all we've shown is that $\hat{p} = p$ is a *critical point* of $f(p,\hat{p})$. For full rigor, what we should show next is that (a) this point is the *only* critical point and that (b) this point is indeed a local maximum. Both of these facts follow directly from the fact that $f$ is *strictly concave* as a function of $\hat{p}$. We'll get into issues of concavity and convexity when we discuss generalizing diversity measures with Bregman divergences in a subsequent post. 
+
+**Summing up from this section:** we played a "guessing game," in which I tried to pick a distribution over tea types **<font color="#543005">black</font>**,  **<font color="#D73027">red</font>**, and **<font color="#A1D76A">green</font>** that would maximize my paycheck from you, my manager -- which was in turn dependent on my performance as evaluated by the negative cross entropy. We proved that my best approach was to pick the distribution over tea types that perfectly mirrors the distribution over customers in the shop. Wasn't that a fun game?
+
+# Entropy Measures Diversity
+
+An important consequence of our result is that we can define the *optimal reward function* in terms of $p$ alone. This function is so important that it has a name: it's negative (Shannon) *entropy*. 
+
+$$ H(p) \triangleq - \max_\hat{p} f(p, \hat{p}) = - \sum_i p_i \log p_i \;.$$
+
+Intuitively, the entropy measures how "hard" the guessing game is: when $H(p)$ is high, my reward in the guessing game is low, *even when I make the best possible choice of $\hat{p}$.* 
+
+Now, what makes the guessing game hard? The answer is: diversity! To see this, let's check on a few properties of $H(p)$. First, suppose that $p = (1,0,0,\ldots)$, that is, there's only one type of tea drinker in the cafe. Then, take a moment to convince yourself that $H(p) = 0$.[^5] It's easy to see that $H(p)$ is nonnegative for any $p$, so the single-tea-type cafe is an entropy minimizer. What distribution over tea types is an entropy maximizer? It's a good exercise to do a Lagrange multiplier analysis similar to the one above to prove the following theorem: 
+
+**Theorem:** *The entropy is maximized by the uniform distribution. Formally, $u = \text{argmax}_p H(p)$, where $u$ is the uniform distribution on $n$ categories: $u = \left( \frac{1}{n},\cdots,\frac{1}{n} \right)$.*
+
+Summing up what we just learned, the entropy $H(p)$ is function of the customers in the cafe that determines how hard it is for me to succeed at the guessing game. The entropy is lowest (the game is easiest) when all customers prefer the same kind of tea, that is, when diversity is minimized. The entropy is highest (the game is hardest) when different tea preferences are represented in equal proportions, that is, when diversity is maximized. In summary, **the entropy $H$ is a measure of diversity. It is high when diversity is high, and low when diversity is low.** 
+
+Let's wrap up by calculating the entropies for the cafe customers on Friday, Saturday and Sunday cafe. In case you've forgotten, they looked like this: 
+
+```{r, fig.height = 3, fig.width = 6, out.height = '300px', out.width = '600px'}
+g
+```
+
+On Friday, only one tea preference (green) is represented, and so $H(p) = 0$. On both Saturday and Sunday, since each tea preference is equally represented on both days, $p$ is the uniform distribution: $p = \left(\frac{1}{3}, \frac{1}{3}, \frac{1}{3} \right)$. In this case, we have $H(p) = \log 3 \approx 1.10$, the highest possible entropy in a world of just three types of tea drinkers. In summary, Friday had minimal diversity of tea drinkers; Saturday and Sunday had maximal diversity. Notice what the entropy **doesn't** capture: the difference between Saturday and Sunday. This reflects the fact that *segregation* is a fundamentally different idea to *diversity.* We'll see how to think about this mathematically in the next post. 
+
+Thanks for reading! 
+
+---
+[^1]: If you'd like to learn more about about information theory, check out Colah's fantastic blog post, [Visual Information Theory](https://colah.github.io/posts/2015-09-Visual-Information/). That post focuses more on the inferential framework than I will today, but is an all-around fantastic resource. 
+[^2]: With apologies to all white and oolong drinkers. Chamomile, tough. 
+[^3]: Technically, these conditions are that the reward function is *proper* and *local.* For further discussion about these ideas, you can check out  [this paper](https://arxiv.org/pdf/1101.5011.pdf), which also anticipates some elements of our further discussion in the context of scoring with Bregman divergences.  
+[^4]: Astute readers will notice that $f(p, \hat{p}) \leq 0$ for all $p$ and $\hat{p}$; that is, I'm talking about being paid negative dollars. If this makes you uncomfortable, imagine instead that you are docking my pay by $-f(p, \hat{p})$, so that I am docked less the more accurate I am.  
+[^5]: We are using the convention that $0 \times \log 0 = 0$. 

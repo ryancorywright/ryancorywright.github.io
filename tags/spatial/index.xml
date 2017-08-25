@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spatial on Math for Humans</title>
+    <link>/tags/spatial/</link>
+    <description>Recent content in Spatial on Math for Humans</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017 Phil Chodrow</copyright>
+    <lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/spatial/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>The Structure of Spatial Segregation</title>
+      <link>/project/structure-segregation/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/project/structure-segregation/</guid>
+      <description>&lt;p&gt;Ethnoracial residential segregation is a complex, multiscalar phenomenon with immense moral and economic costs.
+Modeling the structure and dynamics of segregation are pressing problems for sociology and urban planning, but existing methods have limitations.
+In this paper, we develop a suite of methods, grounded in information theory, for studying the spatial structure of segregation.
+We first advance existing profile and decomposition methods by posing two related regionalization methods, which allow for profile curves with non-constant spatial scale and decomposition analysis with non-arbitrary areal units.
+We then formulate a measure of local spatial scale, which may be used for both detailed, within-city analysis and intercity comparisons.
+These methods highlight detailed insights in the structure and dynamics of urban segregation that would be otherwise easy to miss or difficult to quantify.
+They are computational efficient; applicable to a broad range of study questions; and freely available in open-source software.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>compx</title>
+      <link>/project/compx/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/project/compx/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

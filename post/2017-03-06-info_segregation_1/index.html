@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.26" />
+  <meta name="author" content="Phil Chodrow">
+  <meta name="description" content="PhD Candidate">
+
+  
+  
+  
+    
+  
+  
+    
+    
+    <link rel="stylesheet" href="/css/highlight.min.css">
+    
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.0/css/academicons.min.css" integrity="sha512-GGGNUPDhnG8LEAEDsjqYIQns+Gu8RBs4j5XGlxl7UfRaZBhCCm5jenJkeJL8uPuOXGqgl8/H1gjlWQDRjd3cUQ==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700%7CMerriweather%7CRoboto+Mono">
+  <link rel="stylesheet" href="/css/hugo-academic.css">
+  
+
+  
+
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Math for Humans">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Math for Humans">
+
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/apple-touch-icon.png">
+
+  <link rel="canonical" href="/post/2017-03-06-info_segregation_1/">
+
+  
+
+  <title>Entropy Measures Diversity | Math for Humans</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#navbar-main" data-offset="71">
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Math for Humans</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>Home</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/#publications_selected">
+            
+            <span>Publications</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Posts</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/#projects">
+            
+            <span>Projects</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/#teaching">
+            
+            <span>Teaching</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        <li class="nav-item">
+          <a href="/#contact">
+            
+            <span>Contact</span>
+          </a>
+        </li>
+
+        
+        
+
+        
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <h1 itemprop="name">Entropy Measures Diversity</h1>
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    <time datetime="2017-03-06 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+      Mon, Mar 6, 2017
+    </time>
+  </span>
+
+  
+
+  
+  
+  
+  <span class="article-tags">
+    <i class="fa fa-tags"></i>
+    
+    <a href="/tags/r">r</a
+    >, 
+    
+    <a href="/tags/information-theory">information theory</a
+    >, 
+    
+    <a href="/tags/research">research</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2f2017-03-06-info_segregation_1%2f"
+         target="_blank">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Entropy%20Measures%20Diversity&amp;url=%2fpost%2f2017-03-06-info_segregation_1%2f"
+         target="_blank">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2f2017-03-06-info_segregation_1%2f&amp;title=Entropy%20Measures%20Diversity"
+         target="_blank">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2f2017-03-06-info_segregation_1%2f&amp;title=Entropy%20Measures%20Diversity"
+         target="_blank">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Entropy%20Measures%20Diversity&amp;body=%2fpost%2f2017-03-06-info_segregation_1%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    <div class="article-style" itemprop="articleBody">
+      <p>My current research develops the mathematics of information theory to study segregation in cities. It might not be obvious that this is a logical thing to do. The study of segregation isn’t usually viewed as an inference or communication engineering problem, and therefore doesn’t get much attention from information theorists and statisticians. On the other hand, sociological researchers in quantitative segregation studies do use information-theoretic measures, but tend to be less concerned about the mathematical subtleties. My goal in this series of blog posts is to develop information theory from the ground up as an <em>organizing framework</em> for thinking about segregation. This framework both makes explicit the logic of some of our intuitive thinking about segregation, and also points the way to a wide vista of important extensions, generalizations, and applications. A mathematician can’t ask for much more than that!</p>
+<p>Broadly, this sequence of posts will cover the following topics:</p>
+<ul>
+<li>An <strong>elementary development of information theory</strong> in the context of categorical segregation. Our main focus will be on the entropy, conditional entropy, and mutual information, and what they mean in this context. We’ll ultimately develop a rather beautiful equation that organizes a few key concepts in segregation studies:</li>
+</ul>
+<p><span class="math display">\[\text{Global Diversity} = \text{Local Exposure} + \text{Global Segregation}\]</span></p>
+<ul>
+<li>A <strong>computational interlude</strong>, where we’ll check out how to study spatial segregation in <code>R</code>, using some of the theory we learned above.</li>
+<li>A <strong>return to theory</strong>, where we’ll generalize our categorical measures to handle ordinal and partially ordinal variables.</li>
+</ul>
+<p>What mathematical background do you need to get the most out of this series? I won’t be assuming any prior knowledge of information theory, although it certainly doesn’t hurt.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> You’ll need elementary probability theory – concepts like conditional probabilities and expectation values will be enough. Things will ramp up a bit in mathematical complexity when we get to part 3, but a bit of calculus and fearlessness will be enough to see us through.</p>
+<p>All that said, let’s talk about entropy! First we’ll set up a little toy scenario to analyze. This scenario is going to stick with us in our little adventure through information theory.</p>
+<div id="the-setting" class="section level1">
+<h1>The Setting</h1>
+<p>They say to write what you love, and what I love is tea. Back in my hometown, there’s a great cafe that I used to haunt endlessly in my high school days. The cafe has two main rooms, plus an outdoor garden out back. Schematically, it looks something like this:</p>
+<p><img src="/post/2017-03-06-info_segregation_1_files/figure-html/unnamed-chunk-2-1.png" width="250px" height="250px" style="display: block; margin: auto;" /></p>
+<p>Let’s say the cafe serves just three beverages, all of them different kinds of tea: <strong><font color="#543005">black</font></strong>, <strong><font color="#D73027">red</font></strong>, and <strong><font color="#A1D76A">green</font></strong>.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> This being a popular establishment, on any given day, the rooms are full of folks drinking tea. On three different days last week, the shop looked like this:</p>
+<p><img src="/post/2017-03-06-info_segregation_1_files/figure-html/unnamed-chunk-3-1.png" width="600px" height="300px" style="display: block; margin: auto;" /></p>
+<p>Each little square represents a person; there are <span class="math inline">\(6\times 6 = 36\)</span> customers in the shop on both days. On Friday, we had an overwhelming wave of green tea fanatics, who left no room for drinkers of any other preferences in the shop. On Saturday, each of the three tea preferences was equally represented, and folks spread themselves throughout the shop more-or-less randomly. On Sunday, the three main tea preferences were again evenly represented, but they were cliquey–folks tended to sit in the same room as people who shared their tea preferences.</p>
+</div>
+<div id="diversity-and-segregation" class="section level1">
+<h1>Diversity and Segregation</h1>
+<p>We’d like to use the tea shop to explore mathematical questions of <em>diversity</em> and <em>segregation.</em> Intuitively,</p>
+<ol style="list-style-type: decimal">
+<li><strong>Diversity</strong> is high when all kinds of tea drinkers (black, red, and green) are well-represented.</li>
+<li><strong>Segregation</strong> is high when different kinds of tea drinkers tend to occupy different rooms.</li>
+</ol>
+<p>These ideas are simple, but the same fundamental patterns hold for more high-stakes issues: diversity is high when all genders are well-represented in the workforce, and and segregation is high when people of different genders tend to have different occupations. Diversity is high when many ethnic groups are present in a neighborhood, but segregation is high if children in different groups tend to attend different schools. This all might seem simple enough, but the whole point of mathematics is that thinking deeply about simple ideas can lead us to new insights. With that in mind, let’s reflect on these simple ideas from an advanced point of view.</p>
+</div>
+<div id="the-guessing-game" class="section level1">
+<h1>The Guessing Game</h1>
+<p>You are the manager of the cafe, and I am your assistant. Unfortunately, we ran out of tea today, but I have just enough time to run to our local supplier to restock. I assume that we serve 36 customers in a day, so the only question is how much of each tea I should buy. You are a performance-based manager, and so you reward me based on how well the proportions of tea I bought match the customer’s preferences. Before I run out, I scan the room to see who our customers are: based on what they’ve ordered before, I know that the proportions of tea drinkers are <span class="math inline">\(P_{black} = p_1\)</span>, <span class="math inline">\(P_{green} = p_2\)</span>, and <span class="math inline">\(P_{red} = p_3\)</span>. For example, of all the customers, <span class="math inline">\(100 \times p_2\)</span> percent of them prefer green tea. Assuming we don’t sell any other kinds of tea, it must hold that <span class="math inline">\(p_1 + p_2 + p_3 = 1\)</span>, and further that <span class="math inline">\(p_i \geq 0\)</span> for each <span class="math inline">\(i = 1,\ldots,3\)</span>.</p>
+<p>I need to buy some tea, in proportions <span class="math inline">\(\hat{p}_1\)</span>, <span class="math inline">\(\hat{p}_2\)</span>, and <span class="math inline">\(\hat{p}_3\)</span>. What are the best proportions I should choose? It’s tempting to say that I should choose <span class="math inline">\(\hat{p} = p\)</span> – that is, I should choose the proportions of tea I buy to perfectly reflect our customer preferences That’s not wrong, but it’s important to understand why. And, as in all things, the reason why hinges on how you, my performance-based manager, are paying me.</p>
+<p>Since you’re paying me based on performance, my pay should be a function <span class="math inline">\(f\)</span> of <span class="math inline">\(p\)</span> – the actual state of the world – and <span class="math inline">\(\hat{p}\)</span> – my action. That is, if the true proportions of customers are given by <span class="math inline">\(p\)</span> and I come back with <span class="math inline">\(\hat{p}\)</span> proportions of black, red, and green teas, then you will pay me <span class="math inline">\(f(p, \hat{p})\)</span>. Somewhat surprisingly, it turns out that there’s only one payment function that encourages me to both (a) act on my true beliefs about what our customers will most enjoy and (b) rewards me based only on how well my action matched the customers we actually had, not the customers we “might have had.”<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> This is the <em>negative cross-entropy</em>:<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a></p>
+<p><span class="math display">\[ f(p, \hat{p}) \triangleq \sum_i p_i \log \hat{p}_i\;.\]</span></p>
+<p>Earlier, we had an intuition that the best thing for me to do was to pick proportions that match our customer preferences, that is, pick <span class="math inline">\(\hat{p} = p\)</span>. This turns out to be correct: <strong>Claim:</strong> <em>The true customer proportions maximize the negative cross entropy reward function. Formally,</em></p>
+<p><span class="math display">\[p = \text{argmax}_{\hat{p}} f(p, \hat{p})\;.\]</span></p>
+<p><em>Proof:</em> There are lots of ways to show this standard fact, but let’s do a simple calculation with Lagrange multipliers. First, we’ll need the gradient of <span class="math inline">\(f\)</span> with respect to the components of <span class="math inline">\(\hat{p}\)</span>, which we calculate as:</p>
+<p><span class="math display">\[ \nabla_\hat{p}f(p, \hat{p}) = \left(\frac{p_1}{\hat{p}_1},\cdots, \frac{p_n}{\hat{p}_n}\right)^T\]</span></p>
+<p>The Lagrange multipliers come from the constraint that <span class="math inline">\(g(\hat{p}) \triangleq \sum_i \hat{p}_i = 1\)</span>. The gradient of the constraint function is just</p>
+<p><span class="math display">\[\nabla_{\hat{p}}  g(\hat{p})  = \underbrace{(1,\ldots,1)^T}_{n \text{ copies}}\;.\]</span></p>
+<p>The method of Lagrange multipliers now requires that we find values of <span class="math inline">\(\hat{p}\)</span> and some constant <span class="math inline">\(\lambda \neq 0\)</span> that make the gradients collinear:</p>
+<p><span class="math display">\[\begin{align} 
+    \nabla_\hat{p}f(p, \hat{p}) + \lambda \nabla_{\hat{p}}  g(\hat{p}) &amp;= 0 \\ 
+    g(\hat{p}) &amp;= 1\;.
+\end{align}\]</span></p>
+<p>As usual, this is a system of <span class="math inline">\(n+1\)</span> equations in <span class="math inline">\(n+1\)</span> unknowns (the components of <span class="math inline">\(\hat{p}\)</span> and <span class="math inline">\(\lambda\)</span>), so under reasonable regularity assumptions we expect a unique solution. Solving the first <span class="math inline">\(n\)</span> equations show that <span class="math inline">\(\frac{p_i}{\hat{p}_i} = \frac{p_j}{\hat{p}_j}\)</span> for all <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>, and the constraint implies that <span class="math inline">\(\frac{\hat{p}_i}{p_i} = 1\)</span>, or <span class="math inline">\(\hat{p}_i = p_i\)</span>.</p>
+<p>Are we done? Well, technically no: all we’ve shown is that <span class="math inline">\(\hat{p} = p\)</span> is a <em>critical point</em> of <span class="math inline">\(f(p,\hat{p})\)</span>. For full rigor, what we should show next is that (a) this point is the <em>only</em> critical point and that (b) this point is indeed a local maximum. Both of these facts follow directly from the fact that <span class="math inline">\(f\)</span> is <em>strictly concave</em> as a function of <span class="math inline">\(\hat{p}\)</span>. We’ll get into issues of concavity and convexity when we discuss generalizing diversity measures with Bregman divergences in a subsequent post.</p>
+<p><strong>Summing up from this section:</strong> we played a “guessing game,” in which I tried to pick a distribution over tea types <strong><font color="#543005">black</font></strong>, <strong><font color="#D73027">red</font></strong>, and <strong><font color="#A1D76A">green</font></strong> that would maximize my paycheck from you, my manager – which was in turn dependent on my performance as evaluated by the negative cross entropy. We proved that my best approach was to pick the distribution over tea types that perfectly mirrors the distribution over customers in the shop. Wasn’t that a fun game?</p>
+</div>
+<div id="entropy-measures-diversity" class="section level1">
+<h1>Entropy Measures Diversity</h1>
+<p>An important consequence of our result is that we can define the <em>optimal reward function</em> in terms of <span class="math inline">\(p\)</span> alone. This function is so important that it has a name: it’s negative (Shannon) <em>entropy</em>.</p>
+<p><span class="math display">\[ H(p) \triangleq - \max_\hat{p} f(p, \hat{p}) = - \sum_i p_i \log p_i \;.\]</span></p>
+<p>Intuitively, the entropy measures how “hard” the guessing game is: when <span class="math inline">\(H(p)\)</span> is high, my reward in the guessing game is low, <em>even when I make the best possible choice of <span class="math inline">\(\hat{p}\)</span>.</em></p>
+<p>Now, what makes the guessing game hard? The answer is: diversity! To see this, let’s check on a few properties of <span class="math inline">\(H(p)\)</span>. First, suppose that <span class="math inline">\(p = (1,0,0,\ldots)\)</span>, that is, there’s only one type of tea drinker in the cafe. Then, take a moment to convince yourself that <span class="math inline">\(H(p) = 0\)</span>.<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a> It’s easy to see that <span class="math inline">\(H(p)\)</span> is nonnegative for any <span class="math inline">\(p\)</span>, so the single-tea-type cafe is an entropy minimizer. What distribution over tea types is an entropy maximizer? It’s a good exercise to do a Lagrange multiplier analysis similar to the one above to prove the following theorem:</p>
+<p><strong>Theorem:</strong> <em>The entropy is maximized by the uniform distribution. Formally, <span class="math inline">\(u = \text{argmax}_p H(p)\)</span>, where <span class="math inline">\(u\)</span> is the uniform distribution on <span class="math inline">\(n\)</span> categories: <span class="math inline">\(u = \left( \frac{1}{n},\cdots,\frac{1}{n} \right)\)</span>.</em></p>
+<p>Summing up what we just learned, the entropy <span class="math inline">\(H(p)\)</span> is function of the customers in the cafe that determines how hard it is for me to succeed at the guessing game. The entropy is lowest (the game is easiest) when all customers prefer the same kind of tea, that is, when diversity is minimized. The entropy is highest (the game is hardest) when different tea preferences are represented in equal proportions, that is, when diversity is maximized. In summary, <strong>the entropy <span class="math inline">\(H\)</span> is a measure of diversity. It is high when diversity is high, and low when diversity is low.</strong></p>
+<p>Let’s wrap up by calculating the entropies for the cafe customers on Friday, Saturday and Sunday cafe. In case you’ve forgotten, they looked like this:</p>
+<p><img src="/post/2017-03-06-info_segregation_1_files/figure-html/unnamed-chunk-4-1.png" width="600px" height="300px" style="display: block; margin: auto;" /></p>
+<p>On Friday, only one tea preference (green) is represented, and so <span class="math inline">\(H(p) = 0\)</span>. On both Saturday and Sunday, since each tea preference is equally represented on both days, <span class="math inline">\(p\)</span> is the uniform distribution: <span class="math inline">\(p = \left(\frac{1}{3}, \frac{1}{3}, \frac{1}{3} \right)\)</span>. In this case, we have <span class="math inline">\(H(p) = \log 3 \approx 1.10\)</span>, the highest possible entropy in a world of just three types of tea drinkers. In summary, Friday had minimal diversity of tea drinkers; Saturday and Sunday had maximal diversity. Notice what the entropy <strong>doesn’t</strong> capture: the difference between Saturday and Sunday. This reflects the fact that <em>segregation</em> is a fundamentally different idea to <em>diversity.</em> We’ll see how to think about this mathematically in the next post.</p>
+<p>Thanks for reading!</p>
+<hr />
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>If you’d like to learn more about about information theory, check out Colah’s fantastic blog post, <a href="https://colah.github.io/posts/2015-09-Visual-Information/">Visual Information Theory</a>. That post focuses more on the inferential framework than I will today, but is an all-around fantastic resource.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>With apologies to all white and oolong drinkers. Chamomile, tough.<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>Technically, these conditions are that the reward function is <em>proper</em> and <em>local.</em> For further discussion about these ideas, you can check out <a href="https://arxiv.org/pdf/1101.5011.pdf">this paper</a>, which also anticipates some elements of our further discussion in the context of scoring with Bregman divergences.<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p>Astute readers will notice that <span class="math inline">\(f(p, \hat{p}) \leq 0\)</span> for all <span class="math inline">\(p\)</span> and <span class="math inline">\(\hat{p}\)</span>; that is, I’m talking about being paid negative dollars. If this makes you uncomfortable, imagine instead that you are docking my pay by <span class="math inline">\(-f(p, \hat{p})\)</span>, so that I am docked less the more accurate I am.<a href="#fnref4">↩</a></p></li>
+<li id="fn5"><p>We are using the convention that <span class="math inline">\(0 \times \log 0 = 0\)</span>.<a href="#fnref5">↩</a></p></li>
+</ol>
+</div>
+
+    </div>
+  </div>
+
+</article>
+
+<div class="container">
+  <nav>
+  <ul class="pager">
+    
+    <li class="previous"><a href="/post/2017-02-07-cos_2017_post/"><span
+      aria-hidden="true">&larr;</span> Computing in Optimization and Statistics, 2017</a></li>
+    
+
+    
+    <li class="next"><a href="/post/2017-06-19-info-segregation-2/">Information Measures Segregation <span
+      aria-hidden="true">&rarr;</span></a></li>
+    
+  </ul>
+</nav>
+
+</div>
+
+<div class="article-container">
+  
+<section id="comments">
+  <div id="disqus_thread">
+    <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "philchodrow" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
+</section>
+
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2017 Phil Chodrow &middot; 
+
+      Powered by the <a href="https://github.com/gcushen/hugo-academic" target="_blank">Academic
+      theme</a> for <a href="http://gohugo.io" target="_blank">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha512-jGsMH83oKe9asCpkOVkBnUrDDTp8wl+adkB2D+//JtlxO4SrLoJdhbOysIFQJloQFD+C4Fl1rMsQZF76JjV0eQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.2/imagesloaded.pkgd.min.js" integrity="sha512-iHzEu7GbSc705hE2skyH6/AlTpOfBmkx7nUqTLGzPYR+C1tRaItbRlJ7hT/D3YQ9SV0fqLKzp4XY9wKulTBGTw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js" integrity="sha512-Z5heTz36xTemt1TbtbfXtTq5lMfYnOkXM2/eWcTTiLU01+Sw4ku1i7vScDc8fWhrP2abz9GQzgKH5NGBLoYlAw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/plugins/ScrollToPlugin.min.js" integrity="sha512-CDeU7pRtkPX6XJtF/gcFWlEwyaX7mcAp5sO3VIu/ylsdR74wEw4wmBpD5yYTrmMAiAboi9thyBUr1vXRPA7t0Q==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+    
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML" integrity="sha512-tOav5w1OjvsSJzePRtt2uQPFwBoHt1VZcUq8l8nm5284LEKE9FSJBQryzMBzHxY5P0zRdNqEcpLIRVYFNgu1jw==" crossorigin="anonymous"></script>
+    
+    
+
+  </body>
+</html>
+

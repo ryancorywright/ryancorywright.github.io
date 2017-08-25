@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Teaching on Math for Humans</title>
+    <link>/tags/teaching/</link>
+    <description>Recent content in Teaching on Math for Humans</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017 Phil Chodrow</copyright>
+    <lastBuildDate>Sun, 14 Aug 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/teaching/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Thanks ICERM! (Predictive Policing)</title>
+      <link>/post/2016-08-14-thanks_icerm/</link>
+      <pubDate>Sun, 14 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2016-08-14-thanks_icerm/</guid>
+      <description>&lt;p&gt;Last week, Marta and I had the great privilege to serve as group leaders for a team researching spatial crime networks as part of ICERM&amp;rsquo;s workshop on Predictive Policing. We are grateful to ICERM, the Providence Police Department, Jeff Brantingham, Martin Short, and our group &amp;ndash; Haiyan, Chuntian, Matt, and Monica!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Slides and Exercises for RMarkdown</title>
+      <link>/post/2016-06-23-rmarkdown_slides/</link>
+      <pubDate>Thu, 23 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2016-06-23-rmarkdown_slides/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://rmarkdown.rstudio.com/&#34; target=&#34;_blank&#34;&gt;R Markdown&lt;/a&gt; is an authoring tool for easily sharing reproducible data analysis. If you are learning to use R Markdown, you may be interested in my recent &lt;a href=&#34;/resources/rmarkdown/rmarkdown.html&#34;&gt;slides&lt;/a&gt;  and (download links) &lt;a href=&#34;/resources/rmarkdown/ex1_skeleton.Rmd&#34;&gt;accompanying&lt;/a&gt; &lt;a href=&#34;/resources/rmarkdown/dash_example.Rmd&#34;&gt;exercises&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Slides and Exercises for ggplot2</title>
+      <link>/post/2016-06-08-ggplot2_slides/</link>
+      <pubDate>Wed, 08 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2016-06-08-ggplot2_slides/</guid>
+      <description>&lt;p&gt;The &lt;a href=&#34;http://ggplot2.org/&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;ggplot2&lt;/code&gt;&lt;/a&gt; package for the &lt;code&gt;R&lt;/code&gt; programming language is the best software in the world for 2-D data visualization. If you are new to &lt;code&gt;ggplot2&lt;/code&gt;, you may be interested in a set of simple &lt;a href=&#34;/resources/ggplot2/ggplot2.html&#34;&gt;slides&lt;/a&gt; I wrote, and (download links) the accompanying &lt;a href=&#34;/resources/ggplot2/dash_example.Rmd&#34;&gt;exercises&lt;/a&gt; in the R Markdown format.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

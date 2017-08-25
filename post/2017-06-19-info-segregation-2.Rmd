@@ -1,0 +1,177 @@
+---
+title: "Information Measures Segregation"
+author: "Phil"
+summary: "An introduction to the mutual information and its use in studying segregation. (Information Theory and Segregation, Part 2)"
+tags: [r, information theory, research]
+date: 2017-06-19
+---
+
+
+
+```{r setup, include=FALSE}
+philhelm::blog_opts(fig.align = 'center')
+```
+
+[Last time](/post/2017-03-06-info_segregation_1/), we studied the information-theoretic idea of *entropy* and its relationship to our intuitive concept of *diversity*. We saw that the entropy $H$ is highest precisely when all possible groups are represented equally in a population, and lowest when only one group is represented. High entropy, high diversity. 
+
+Now let's move on to an information-theoretic view of *segregation*. It's important to remember that segregation is a fundamentally distinct concept from diversity. We can remind ourselves of this difference by recalling the example of the tea drinkers in the cafe. There are drinkers who prefer **<font color="#543005">black</font>**,  **<font color="#D73027">red</font>**, and **<font color="#A1D76A">green</font>** teas; on three different days, the population of the cafe looked like this: 
+
+```{r}
+library(tidyverse)
+library(ggthemes)
+```
+
+```{r, fig.height = 3, fig.width = 6, out.height = '300px', out.width = '600px'}
+set.seed(1298)
+
+
+shop <- data_frame(room = c('left', 'right', 'garden'), 
+		   xmin = c(0, 3, 0) ,
+		   xmax = c(3, 6, 6),
+		   ymin = c(0, 0, 4), 
+		   ymax = c(4, 4, 6))
+
+
+tea_palette <- c(RColorBrewer::brewer.pal(name = 'BrBG', n = 11)[1], # deep brown
+				 RColorBrewer::brewer.pal(name = 'PiYG', n = 3)[3],
+				 RColorBrewer::brewer.pal(name = 'RdYlBu', n = 9)[1] # red
+				 )   # green
+
+selection <- data_frame(color = factor(c('Black', 'Red', 'Green')),
+						x = 1:3, 
+						text_color = c('#ffffff', '#262626', '#262626'))
+
+seg_teas <- data_frame(room = c('left', 'right', 'garden'), 
+					   tea = c('Black', 'Red', 'Green'))
+
+available_teas <- rep(selection$color, 12)
+
+shop_patrons <- expand.grid(x = 1:6, 
+						    y = 1:6) %>% 
+	tbl_df() %>% 
+	mutate(room = ifelse(y > 4, 'garden', 'left'),
+		   room = ifelse(x > 3 & y <= 4 , 'right', room),
+		   Friday = 'Green',
+		   Saturday = sample(available_teas, replace = F, size = nrow(.))) %>% 
+	left_join(seg_teas, by = c('room' = 'room')) %>% 
+	rename(Sunday = tea) %>% 
+	gather(key = day, value = tea, -x, -y, -room)
+
+g <- shop_patrons %>% 
+	ggplot() + 
+	geom_rect(aes(xmin = x-1, xmax = x, ymin = y-1, ymax = y, fill = tea)) + 
+	facet_wrap(~day) + 
+	geom_rect(aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),alpha = 0, size = 2, color = 'grey40', data = shop) + 
+	ggthemes::theme_map() + 
+	scale_fill_manual(values = tea_palette) + 
+	theme(legend.position = 'bottom',
+		  strip.background = element_blank(),
+		  legend.title = element_blank(),
+		  strip.text = element_text(size = 12),
+		  legend.justification = c(.5, 0),
+		  legend.text = element_text(size = 12))
+
+list(tea_palette, shop_patrons, seg_teas) %>% saveRDS('tea_shop.rds')
+
+g
+```
+
+We're interested in whether or not the shop is *diverse*, and whether or not it is *segregated* (by room). Intuitively,
+
+- **Friday** is neither diverse nor segregated. 
+- **Saturday** is diverse, but fairly unsegregated. 
+- **Sunday** is diverse but highly segregated. 
+
+As you may remember, the entropy $H$ could distinguish Friday ($H = 0$) from Saturday and Sunday ($H = 1.10$), but couldn't distinguish Saturday and Sunday from each other. For that we need more subtle ideas. Let's dive in! 
+
+# Local Entropy
+
+One way to think about segregation is just to think about diversity again -- but on a lower level of organization. To see this, compare Saturday and Sunday again, *within each room*. Computing entropies for each of the three rooms individually, on each day, we have:
+
+```{r}
+shop_patrons %>% 
+	group_by(day, room, tea) %>% 
+	summarise(n = n()) %>% 
+	group_by(day, room) %>% 
+    mutate(p = n / sum(n)) %>% 
+	group_by(day, room) %>%
+	summarise(H = -sum(p * log(p), na.rm = T)) %>% 
+	mutate(H = round(H, 2)) %>% 
+	spread(key = room, value = H) %>% 
+	knitr::kable(col.names = c('Day', 'Garden', 'Left', 'Right'))
+```
+
+Just as we'd expect, the entropies in the individual rooms are zero on Friday and Sunday, but high on Saturday, reflecting diversity in each room. 
+
+Mathematically, the entropy of each individual room is an example of *conditioned* or *local* entropy. To write this down, let's allow $Y$ to be a random variable denoting the tea preference of a randomly selected customer, and $X$ be a random variable denoting where they sit in the cafe. Then, we can write the overall entropy as $H(Y)$, and the entropy of tea preferences conditioned on sitting in the garden as as $H(Y \vert X = \text{garden})$. The average value of the conditioned entropy across all rooms is important enough to have a special name: the *conditional entropy*. We can write it as:  
+
+$$H(Y\vert X) \triangleq \sum_{x \in \{\text{garden, left, right}\}} H(Y|X = x) \mathbb{P}(X = x)\;.$$
+
+To calculate the conditional entropy, we compute the local entropy conditioned on each room, and then take a weighted average in which each room counts according to its "population." This weighting is reflected in the factor $\mathbb{P}(X = x)$, which can be read as "the probability that a randomly selected patron is sitting in room $x$." In our example, this is the same as the proportion of patrons in room $x$. Applying the formula above to the local entropies we calculated earlier, we have that $H(Y\vert X) \approx 1.09$ on Saturday, and is zero on Friday and Sunday. 
+
+# Mutual Information Measures Segregation
+
+Let's summarise: 
+
+|Day      | Diverse| Segregated| $H(Y)$ | $H(Y \vert X)$ |
+|:--------|------:|----:|-----:| ----:|
+|Friday   |     No|   No|  0.00| 0.00 |
+|Saturday |    Yes|   No|  1.10| 1.09 |
+|Sunday   |    Yes|  Yes|  1.10| 0.00 |
+
+A pattern is emerging: if diversity is measured by *high* $H(Y)$, segregation is measured by *high* $H(Y)$ and *low* $H(Y \vert X)$. The difference between $H(Y)$ and $H(Y \vert X)$ turns out to be a fundamental concept in information theory: the **mutual information**, denoted $I(X,Y)$. 
+
+$$ I(X,Y) \triangleq H(Y) - H(Y \vert X) \;.$$
+
+Recall from last post that $H(Y)$ measures the difficulty of a guessing game in which I try to match the preferences of the cafe customers. From our discussion above, we can think of $H(Y\vert X)$ in similar terms: its the difficulty of a guessing game in which I try to match the preferences of customers in *in a single room.* So, $I(X,Y)$ can be interpreted as the (average) **value of knowing which room I need to serve.** The value is high on Sunday: matching the preferences of the whole shop is hard (high entropy), but if you tell me which room I am serving, the problem is suddenly easy -- I only need to accomodate one kind of customer. This phenomenon is measured by a high value of $I(X,Y) = 1.10$. On Saturday, however, matching the preferences of any individual room is about as hard as matching the preferences of the whole shop: both the entropy $H(Y)$ and conditional entropy $H(Y\vert X)$ are high, giving a low value of $I(X,Y)$. 
+
+Another natural way to say this is that knowing what room I am serving is highly *informative* on Sunday, but not on Saturday. The mutual information measures exactly how informative that knowledge really is. 
+
+Let's now cash out the role of the mutual information in the measurement of segregation. It's possible to prove that the only case in which $I(X,Y) = 0$ is perecisely the one in which each room has the same distribution of tea preferences as the shop generally. This obtains on Friday and Saturday, but not Sunday. Furthermore, $I(X,Y)$ achieves its maximum value of $H(Y)$ precisely when each room has just one kind of tea drinker: the Saturday scenario. The larger $I(X,Y)$, the greater role that your tea preference plays in determining what room you sit in. 
+
+Indeed, $I(X,Y)$ turns out to be such a natural measure of segregation that it was reinvented in the sociological community some 25 years after Shannon's seminal work founding information theory. The frequently used "Information Theory Index" of 	Theil and Finezza (1971)[^1] is nothing more than $I(X,Y) / H(Y)$; the normalization by $H(Y)$ results in a measure that takes values in $[0,1]$. Formally, what $I(X,Y)$ measures is *unevenness*: the tendency of groups to be differently-distributed in space. Since Theil and Finezza, a number[^2] of methodologists[^3] have formulated[^4] a variety[^5] of measures,[^6] all of which can be viewed as normalized mutual informations.[^7]   
+
+## Mutual Information Measures Dependence
+
+Readers with statistical background might read the above as a statement about dependence: $I(X,Y)$ measures the degree of statistical association between room and tea preference. Let's step back from the context of diversity for a moment to explore this point. To do this, let's compare $I(X,Y)$ to a more familiar quantity that does something similar: the correlation coefficient $R^2$. If you took a statistics class, you might remember linear regression, the problem of drawing a "best fit" line through a cloud of data plotted on the $x-y$ plane. One thing you might have done was to compute "$R^2$," which is more formally called the Pearson correlation coefficient. When $R^2 = 1$, the explanatory variable $x$ is perfectly correlated with the explanandum $y$, but when $R^2 = 0$, there's no linear relationship. One thing that might have been emphasized to you is:
+
+> $R^2 = 0$ does not imply that the variables $x$ and $y$ are independent. 
+
+Here's a [set of examples](https://commons.wikimedia.org/wiki/File:Correlation_examples2.svg#/media/File:Correlation_examples2.svg) that you can view on Wikipedia: the bottom row data sets are all uncorrelated ($R^2 = 0$), but clearly not independent. 
+
+The mutual information $I(X,Y)$ is something like a correlation coefficient on steroids, in the sense that:
+
+> $I(X,Y) = 0$ **does** imply that $X$ and $Y$ are independent.   
+
+One nice thing about this result is that it actually makes precise an intuition about probabilistic dependence that many of us share: two variables are dependent if knowing one "gives you information" about the other. $I(X,Y)$ quantifies this idea and makes it rigorously correct. 
+
+# The Fundamental Equation of Segregation and Diversity
+
+Returning to segregation and diversity, we're ready to write out a lovely and simple equation relating diversity and segregation across spatial scales. 
+Let's go back to the definition of $I(X,Y)$ above. Let's recall first that $H(Y)$ measures the diversity of the entire shop. Next, the conditional entropy $H(Y|X)$ is a measure of average diversity in each room. In the context of segregation studies,  $H(Y|X)$ measures **exposure** -- the diversity that an individual experiences in their local environment. From my individual perspective, the diversity of the entire shop doesn't matter -- just the diversity of my immediate surroundings. Finally, as we discussed above, the mutual information $I(X,Y)$ measures the segregation of the entire shop. If we take the definition of $I(X,Y) = H(Y) - H(Y|X)$ and rearrange the terms, we wind up with what I think of as the fundamental equation of segregation and diversity: 
+
+$$\text{Global Diversity} = \text{Local Exposure} + \text{Global Segregation}$$
+
+What's striking about this equation is not surprise or complexity, but the way it so neatly organizes natural concepts into a quantitative order. The intuition here is simple: if there are many groups coexisting in a system (global diversity is high), then they must exist either in the same spaces (local exposure is high) or in difference spaces (global segregation is high). One of my favorite points about information theory is its ability to give precise quantitative formulations for common sense ideas about structure and learning; this equation is a prime example. 
+
+# What's Next
+
+Thanks to everyone who checked in for this two-part series! We covered the elements of an information-theoretic view of diversity and segregation. My aim in future posts is to discuss how to do practical computation with these measures. I'll also discuss some of my research into how to analyze diversity and segregation at multiple spatial scales, and how to algorithmically find spatial structure in social systems. 
+
+
+[^1]: Theil, H., & Finezza, A. J. (1971). A note on the measurement of racial integration of schools by means of informational concepts. Taylor and Francis.
+[^2]: Reardon, S. F. (2008). Measures of Ordinal Segregation. In Y. Flückiger, S. F. Reardon, & J. Silber (Eds.), Occupational and Residential Segregation (Research on Economic Inequality, Volume 17) (pp. 129–155).
+[^3]: Reardon, S. F., & O’Sullivan, D. (2004). Measures of Spatial Segregation. Sociological Methodology, 34(1), 121–162. http://doi.org/10.1111/j.0081-1750.2004.00150.x
+[^4]: Reardon, S. F., & Firebaugh, G. (2002). Measures of multigroup segregation. Sociological Methodology, 32, 33–67. http://doi.org/10.1111/1467-9531.00110
+[^5]: Jargowsky, P. A., & Kim, J. (2005). A measure of spatial segregation: The generalized neighborhood sorting index. National Poverty Center Working Paper Series. Retrieved from http://nationalpovertycenter.net/publications/workingpaper05/paper03/jargowsky_kim_21mar2005.pdf
+[^6]: Roberto, E. (2015). Measuring Inequality and Segregation. arXiv.org, 1–26. Retrieved from http://arxiv.org/abs/1508.01167
+[^7]: Roberto, E. (2016). The Spatial Context of Residential Segregation. arXiv.org, 1–27.
+
+
+
+
+
+
+
+
+

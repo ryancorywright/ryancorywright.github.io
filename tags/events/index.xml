@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Events on Math for Humans</title>
+    <link>/tags/events/</link>
+    <description>Recent content in Events on Math for Humans</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017 Phil Chodrow</copyright>
+    <lastBuildDate>Tue, 07 Feb 2017 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/events/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Computing in Optimization and Statistics, 2017</title>
+      <link>/post/2017-02-07-cos_2017_post/</link>
+      <pubDate>Tue, 07 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017-02-07-cos_2017_post/</guid>
+      <description>&lt;p&gt;Last month, I had the pleasure to co-organize an Independent Activities Period (J-term) course on Computing in Optimization and Statistics, course number 15.S60. What&amp;rsquo;s great about 15.S60 is that it&amp;rsquo;s entirely run and taught by grad student volunteers, just for the fun and satisfaction of sharing expertise with their peers. As you&amp;rsquo;d expect, the students who are motivated to do this are friendly, thoughtful, and love teaching &amp;ndash; it was a huge pleasure to work with them.&lt;/p&gt;
+
+&lt;p&gt;Each year, we aim to cover software tools and topics that will of use to a wide range of practicing researchers in applied math, computer science, operations research, and computational engineering. Along the way, we aim to promote free and open source software (FOSS) tools in computational science when appropriate. Toward these aims, we&amp;rsquo;ve gradually evolved a four-part course sequence:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Introductory Computing Skills (session 1)&lt;/li&gt;
+&lt;li&gt;Data Science in R (sessions 2-4)&lt;/li&gt;
+&lt;li&gt;Optimization with Julia and JuMP (sessions 5-6)&lt;/li&gt;
+&lt;li&gt;Additional Topics (sessions 7-8)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This year, the &amp;ldquo;additional topics&amp;rdquo; were operations research in Excel and deep learning with Python and TensorFlow.&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re interested in learning more about these topics, I encourage you to check out our &lt;a href=&#34;https://philchodrow.github.io/cos_2017/&#34; target=&#34;_blank&#34;&gt;course website&lt;/a&gt;, where you can see summaries of each session and access all our course materials for free.&lt;/p&gt;
+
+&lt;p&gt;Many thanks to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;My co-organizer&lt;/strong&gt;, Brad Sturt.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Our instructors&lt;/strong&gt;: Jackie Baek, Steve Morse, Clark Pixton, Colin Pawlowski, Seb Martin, Joey Huchette, Miles Lubin, Yee Sian Ng, Charlie Thraves, and Eli Gutin.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Thanks ICERM! (Predictive Policing)</title>
+      <link>/post/2016-08-14-thanks_icerm/</link>
+      <pubDate>Sun, 14 Aug 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2016-08-14-thanks_icerm/</guid>
+      <description>&lt;p&gt;Last week, Marta and I had the great privilege to serve as group leaders for a team researching spatial crime networks as part of ICERM&amp;rsquo;s workshop on Predictive Policing. We are grateful to ICERM, the Providence Police Department, Jeff Brantingham, Martin Short, and our group &amp;ndash; Haiyan, Chuntian, Matt, and Monica!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
