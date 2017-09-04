@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Statistics on Math for Humans</title>
+    <link>/tags/statistics/</link>
+    <description>Recent content in Statistics on Math for Humans</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017 Phil Chodrow</copyright>
+    <lastBuildDate>Mon, 04 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/statistics/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>A Quick Note on the KL Divergence</title>
+      <link>/post/2017-09-04-divergence/</link>
+      <pubDate>Mon, 04 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017-09-04-divergence/</guid>
+      <description>&lt;p&gt;I’m currently thinking about a small problem that uses &lt;a href=&#34;https://en.wikipedia.org/wiki/Variational_Bayesian_methods&#34;&gt;variational Bayesian methods&lt;/a&gt;. Variational Bayesian methods operate by minimizing a difference function between a true posterior &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; and variational approximation &lt;span class=&#34;math inline&#34;&gt;\(q\)&lt;/span&gt;; the assumption is that &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; is intractable to calculate but the approximation class to which &lt;span class=&#34;math inline&#34;&gt;\(q\)&lt;/span&gt; belongs allows for tractable computation. The difference function is typically taken to be the Kullback-Leibler (KL) divergence&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[D[q \|p] \triangleq \int_x q(x) \log \frac{q(x)}{p(x)}\;.\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;As a result, the KL divergence pops up all over the relevant calculations. While working on some of these calculations, I noticed a simple but rather nice property that I don’t see highlighted much. Let &lt;span class=&#34;math inline&#34;&gt;\(p(x,y) = p_x(x)p_y(y)\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(q(x,y) = q_x(x)q_y(y)\)&lt;/span&gt; both be joint distributions over random variables &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt;. Since they factor, &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt; are independent under both distributions. Then,&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ 
+    \begin{aligned}
+        D[q \| p] &amp;amp;= \int_{x,y} q(x,y) \log \frac{q(x,y)}{p(x,y)}  \\ 
+        &amp;amp;= \int_{x,y} q_x(x)q_y(y) \log \frac{q_x(x)q_y(y)}{p_x(x)p_y(y)}  \\
+        &amp;amp;= \int_{x,y} q_x(x)q_y(y) \log \frac{q_x(x)q_y(y)}{p_x(x)p_y(y)}  \\ 
+        &amp;amp;= \int_{x,y} q_x(x)q_y(y)\left[\log \frac{q_x(x)}{p_x(x)} + \log \frac{q_y(y)}{p_y(y)} \right] \\ 
+        &amp;amp;= \int_{x} q_x(x) \int_y q_y(y)\left[\log \frac{q_x(x)}{p_x(x)} + \log \frac{q_y(y)}{p_y(y)} \right] \\ 
+        &amp;amp;= \int_x q_x(x) \left[\log \frac{q_x(x)}{p_x(x)} + D[q_y \| p_y]\right] \\ 
+        &amp;amp;= D[q_x \| p_x] + D[q_y \| p_y]\;.
+    \end{aligned}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;That is, the divergence of factorizable distributions is just the sum of divergences between the factors.&lt;/p&gt;
+&lt;div id=&#34;a-better-proof-in-the-discrete-case&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;A Better Proof (in the Discrete Case)&lt;/h1&gt;
+&lt;p&gt;However, this mass of algebra is clearly not the most insightful way to see this fact. A better proof (in the discrete case) starts with the formula for the KL divergence as a Bregman divergence&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ 
+    D[q\| p]  = f(q) - f(p) + \langle \nabla f(p), q - p   \rangle\;,
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where &lt;span class=&#34;math display&#34;&gt;\[f(q) = - H(q) = \sum_x q(x) \log q(x)\]&lt;/span&gt; is the negative of the entropy of &lt;span class=&#34;math inline&#34;&gt;\(q\)&lt;/span&gt;. It is well-known that entropies of independent random variables add: if &lt;span class=&#34;math inline&#34;&gt;\(q(x,y) = q_x(x)q_y(y)\)&lt;/span&gt;, then &lt;span class=&#34;math inline&#34;&gt;\(H(q) = H(q_x) + H(q_y)\)&lt;/span&gt;. So, we have&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ 
+    \begin{aligned}
+        D[q\| p]  &amp;amp;= f(q) - f(p) + \langle \nabla f(p), q - p   \rangle \\ 
+                  &amp;amp;= f(q_x) + f(q_y) - f(p_x) - f(p_y) + \langle \nabla [f(p_x) + f(p_y)], q_xq_y - p_xp_y \rangle \\
+                  &amp;amp;= f(q_x) + f(q_y) - f(p_x) - f(p_y) + \langle \nabla [f(p_x), q_x - p_x \rangle + \langle \nabla [f(p_y), q_y - p_y \rangle\\ 
+                  &amp;amp;= D[q_x\|p_x] + D[q_y\|p_y]\;,
+    \end{aligned}
+\]&lt;/span&gt; as was to be shown. The inference from the second line requires some slightly tricky reasoning – the key is that the gradient &lt;span class=&#34;math inline&#34;&gt;\(\nabla f(p)\)&lt;/span&gt; is with respect to all &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{X} \times \mathcal{Y}\)&lt;/span&gt; components of &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;; when we split up &lt;span class=&#34;math inline&#34;&gt;\(f(p) = f(p_x) + f(p_y)\)&lt;/span&gt; and compute the gradient that way, we obtain a vector many of whose components are zero – precisely marginalizing the cross-factors in the final term.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

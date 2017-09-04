@@ -41,11 +41,11 @@
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/apple-touch-icon.png">
 
-  <link rel="canonical" href="/post/2017-09-04-mban/">
+  <link rel="canonical" href="/post/2017-09-04-divergence/">
 
   
 
-  <title>Introduction to Data Science in R | Math for Humans</title>
+  <title>A Quick Note on the KL Divergence | Math for Humans</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#navbar-main" data-offset="71">
@@ -170,7 +170,7 @@
 
 
   <div class="article-container">
-    <h1 itemprop="name">Introduction to Data Science in R</h1>
+    <h1 itemprop="name">A Quick Note on the KL Divergence</h1>
     
 
 <div class="article-metadata">
@@ -189,10 +189,13 @@
   <span class="article-tags">
     <i class="fa fa-tags"></i>
     
-    <a href="/tags/r">r</a
+    <a href="/tags/math">math</a
     >, 
     
-    <a href="/tags/teaching">teaching</a
+    <a href="/tags/statistics">statistics</a
+    >, 
+    
+    <a href="/tags/information-theory">information theory</a
     >
     
   </span>
@@ -205,35 +208,35 @@
   <ul class="share">
     <li>
       <a class="facebook"
-         href="https://www.facebook.com/sharer.php?u=%2fpost%2f2017-09-04-mban%2f"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2f2017-09-04-divergence%2f"
          target="_blank">
         <i class="fa fa-facebook"></i>
       </a>
     </li>
     <li>
       <a class="twitter"
-         href="https://twitter.com/intent/tweet?text=Introduction%20to%20Data%20Science%20in%20R&amp;url=%2fpost%2f2017-09-04-mban%2f"
+         href="https://twitter.com/intent/tweet?text=A%20Quick%20Note%20on%20the%20KL%20Divergence&amp;url=%2fpost%2f2017-09-04-divergence%2f"
          target="_blank">
         <i class="fa fa-twitter"></i>
       </a>
     </li>
     <li>
       <a class="linkedin"
-         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2f2017-09-04-mban%2f&amp;title=Introduction%20to%20Data%20Science%20in%20R"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2f2017-09-04-divergence%2f&amp;title=A%20Quick%20Note%20on%20the%20KL%20Divergence"
          target="_blank">
         <i class="fa fa-linkedin"></i>
       </a>
     </li>
     <li>
       <a class="weibo"
-         href="http://service.weibo.com/share/share.php?url=%2fpost%2f2017-09-04-mban%2f&amp;title=Introduction%20to%20Data%20Science%20in%20R"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2f2017-09-04-divergence%2f&amp;title=A%20Quick%20Note%20on%20the%20KL%20Divergence"
          target="_blank">
         <i class="fa fa-weibo"></i>
       </a>
     </li>
     <li>
       <a class="email"
-         href="mailto:?subject=Introduction%20to%20Data%20Science%20in%20R&amp;body=%2fpost%2f2017-09-04-mban%2f">
+         href="mailto:?subject=A%20Quick%20Note%20on%20the%20KL%20Divergence&amp;body=%2fpost%2f2017-09-04-divergence%2f">
         <i class="fa fa-envelope"></i>
       </a>
     </li>
@@ -246,7 +249,37 @@
 </div>
 
     <div class="article-style" itemprop="articleBody">
-      <p><a href="http://www.mit.edu/~zhuo/" target="_blank">Daisy Zhuo</a> and I had the pleasure last week of leading a day-long session for MIT&rsquo;s Master of Business Analytics students in which we survey a complete, <a href="https://www.tidyverse.org/" target="_blank">tidy</a> data science workflow for the <code>R</code> programming language. If you are interested in a concise introduction to the basics, or can use these materials in your own teaching, please feel free to browse them <a href="https://philchodrow.github.io/mban_orientation/data_science_intro/index.html" target="_blank">here</a>. Feedback is most welcome!</p>
+      <p>I’m currently thinking about a small problem that uses <a href="https://en.wikipedia.org/wiki/Variational_Bayesian_methods">variational Bayesian methods</a>. Variational Bayesian methods operate by minimizing a difference function between a true posterior <span class="math inline">\(p\)</span> and variational approximation <span class="math inline">\(q\)</span>; the assumption is that <span class="math inline">\(p\)</span> is intractable to calculate but the approximation class to which <span class="math inline">\(q\)</span> belongs allows for tractable computation. The difference function is typically taken to be the Kullback-Leibler (KL) divergence</p>
+<p><span class="math display">\[D[q \|p] \triangleq \int_x q(x) \log \frac{q(x)}{p(x)}\;.\]</span></p>
+<p>As a result, the KL divergence pops up all over the relevant calculations. While working on some of these calculations, I noticed a simple but rather nice property that I don’t see highlighted much. Let <span class="math inline">\(p(x,y) = p_x(x)p_y(y)\)</span> and <span class="math inline">\(q(x,y) = q_x(x)q_y(y)\)</span> both be joint distributions over random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. Since they factor, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent under both distributions. Then,</p>
+<p><span class="math display">\[ 
+    \begin{aligned}
+        D[q \| p] &amp;= \int_{x,y} q(x,y) \log \frac{q(x,y)}{p(x,y)}  \\ 
+        &amp;= \int_{x,y} q_x(x)q_y(y) \log \frac{q_x(x)q_y(y)}{p_x(x)p_y(y)}  \\
+        &amp;= \int_{x,y} q_x(x)q_y(y) \log \frac{q_x(x)q_y(y)}{p_x(x)p_y(y)}  \\ 
+        &amp;= \int_{x,y} q_x(x)q_y(y)\left[\log \frac{q_x(x)}{p_x(x)} + \log \frac{q_y(y)}{p_y(y)} \right] \\ 
+        &amp;= \int_{x} q_x(x) \int_y q_y(y)\left[\log \frac{q_x(x)}{p_x(x)} + \log \frac{q_y(y)}{p_y(y)} \right] \\ 
+        &amp;= \int_x q_x(x) \left[\log \frac{q_x(x)}{p_x(x)} + D[q_y \| p_y]\right] \\ 
+        &amp;= D[q_x \| p_x] + D[q_y \| p_y]\;.
+    \end{aligned}
+\]</span></p>
+<p>That is, the divergence of factorizable distributions is just the sum of divergences between the factors.</p>
+<div id="a-better-proof-in-the-discrete-case" class="section level1">
+<h1>A Better Proof (in the Discrete Case)</h1>
+<p>However, this mass of algebra is clearly not the most insightful way to see this fact. A better proof (in the discrete case) starts with the formula for the KL divergence as a Bregman divergence</p>
+<p><span class="math display">\[ 
+    D[q\| p]  = f(q) - f(p) + \langle \nabla f(p), q - p   \rangle\;,
+\]</span></p>
+<p>where <span class="math display">\[f(q) = - H(q) = \sum_x q(x) \log q(x)\]</span> is the negative of the entropy of <span class="math inline">\(q\)</span>. It is well-known that entropies of independent random variables add: if <span class="math inline">\(q(x,y) = q_x(x)q_y(y)\)</span>, then <span class="math inline">\(H(q) = H(q_x) + H(q_y)\)</span>. So, we have</p>
+<p><span class="math display">\[ 
+    \begin{aligned}
+        D[q\| p]  &amp;= f(q) - f(p) + \langle \nabla f(p), q - p   \rangle \\ 
+                  &amp;= f(q_x) + f(q_y) - f(p_x) - f(p_y) + \langle \nabla [f(p_x) + f(p_y)], q_xq_y - p_xp_y \rangle \\
+                  &amp;= f(q_x) + f(q_y) - f(p_x) - f(p_y) + \langle \nabla [f(p_x), q_x - p_x \rangle + \langle \nabla [f(p_y), q_y - p_y \rangle\\ 
+                  &amp;= D[q_x\|p_x] + D[q_y\|p_y]\;,
+    \end{aligned}
+\]</span> as was to be shown. The inference from the second line requires some slightly tricky reasoning – the key is that the gradient <span class="math inline">\(\nabla f(p)\)</span> is with respect to all <span class="math inline">\(\mathcal{X} \times \mathcal{Y}\)</span> components of <span class="math inline">\(p\)</span>; when we split up <span class="math inline">\(f(p) = f(p_x) + f(p_y)\)</span> and compute the gradient that way, we obtain a vector many of whose components are zero – precisely marginalizing the cross-factors in the final term.</p>
+</div>
 
     </div>
   </div>
@@ -257,13 +290,10 @@
   <nav>
   <ul class="pager">
     
-    <li class="previous"><a href="/post/intro_information_theory/"><span
-      aria-hidden="true">&larr;</span> An Opinionated Introduction to Information Theory</a></li>
+    <li class="previous"><a href="/post/2017-09-04-mban/"><span
+      aria-hidden="true">&larr;</span> Introduction to Data Science in R</a></li>
     
 
-    
-    <li class="next"><a href="/post/2017-09-04-divergence/">A Quick Note on the KL Divergence <span
-      aria-hidden="true">&rarr;</span></a></li>
     
   </ul>
 </nav>

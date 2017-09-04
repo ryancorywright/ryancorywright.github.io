@@ -1,0 +1,52 @@
+---
+title : "A Quick Note on the KL Divergence"
+author: "Phil"
+output: html_document
+summary :  "While working on a variational Bayes problem, I noticed that divergences of independent distributions add."
+date : "2017-09-04"
+draft : false
+tags : ["math", "statistics", "information theory"]
+math : true
+---
+
+I'm currently thinking about a small problem that uses [variational Bayesian methods](https://en.wikipedia.org/wiki/Variational_Bayesian_methods). Variational Bayesian methods operate by minimizing a difference function between a true posterior $p$ and variational approximation $q$; the assumption is that $p$ is intractable to calculate but the approximation class to which $q$ belongs allows for tractable computation. The difference function is typically taken to be the Kullback-Leibler (KL) divergence 
+
+$$D[q \|p] \triangleq \int_x q(x) \log \frac{q(x)}{p(x)}\;.$$ 
+
+As a result, the KL divergence pops up all over the relevant calculations. While working on some of these calculations, I noticed a simple but rather nice property that I don't see highlighted much. Let $p(x,y) = p_x(x)p_y(y)$ and $q(x,y) = q_x(x)q_y(y)$ both be joint distributions over random variables $X$ and $Y$. Since they factor, $X$ and $Y$ are independent under both distributions. Then, 
+
+$$ 
+    \begin{aligned}
+        D[q \| p] &= \int_{x,y} q(x,y) \log \frac{q(x,y)}{p(x,y)}  \\ 
+        &= \int_{x,y} q_x(x)q_y(y) \log \frac{q_x(x)q_y(y)}{p_x(x)p_y(y)}  \\
+        &= \int_{x,y} q_x(x)q_y(y) \log \frac{q_x(x)q_y(y)}{p_x(x)p_y(y)}  \\ 
+        &= \int_{x,y} q_x(x)q_y(y)\left[\log \frac{q_x(x)}{p_x(x)} + \log \frac{q_y(y)}{p_y(y)} \right] \\ 
+        &= \int_{x} q_x(x) \int_y q_y(y)\left[\log \frac{q_x(x)}{p_x(x)} + \log \frac{q_y(y)}{p_y(y)} \right] \\ 
+        &= \int_x q_x(x) \left[\log \frac{q_x(x)}{p_x(x)} + D[q_y \| p_y]\right] \\ 
+        &= D[q_x \| p_x] + D[q_y \| p_y]\;.
+    \end{aligned}
+$$
+
+That is, the divergence of factorizable distributions is just the sum of divergences between the factors. 
+
+# A Better Proof (in the Discrete Case)
+
+However, this mass of algebra is clearly not the most insightful way to see this fact. A better proof (in the discrete case) starts with the formula for the KL divergence as a Bregman divergence
+
+$$ 
+	D[q\| p]  = f(q) - f(p) + \langle \nabla f(p), q - p   \rangle\;,
+$$
+
+where $$f(q) = - H(q) = \sum_x q(x) \log q(x)$$ is the negative of the entropy of $q$. It is well-known that entropies of independent random variables add: if $q(x,y) = q_x(x)q_y(y)$, then $H(q) = H(q_x) + H(q_y)$. So, we have 
+
+$$ 
+	\begin{aligned}
+		D[q\| p]  &= f(q) - f(p) + \langle \nabla f(p), q - p   \rangle \\ 
+		          &= f(q_x) + f(q_y) - f(p_x) - f(p_y) + \langle \nabla [f(p_x) + f(p_y)], q_xq_y - p_xp_y \rangle \\
+		          &= f(q_x) + f(q_y) - f(p_x) - f(p_y) + \langle \nabla [f(p_x), q_x - p_x \rangle + \langle \nabla [f(p_y), q_y - p_y \rangle\\ 
+		          &= D[q_x\|p_x] + D[q_y\|p_y]\;,
+	\end{aligned}
+$$
+as was to be shown. The inference from the second line requires some slightly tricky reasoning -- the key is that the gradient $\nabla f(p)$ is with respect to all $\mathcal{X} \times \mathcal{Y}$ components of $p$; when we split up $f(p) = f(p_x) + f(p_y)$ and compute the gradient that way, we obtain a vector many of whose components are zero -- precisely marginalizing the cross-factors in the final term. 
+
+
