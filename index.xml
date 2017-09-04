@@ -11,6 +11,16 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Introduction to Data Science in R</title>
+      <link>/post/2017-09-04-mban/</link>
+      <pubDate>Mon, 04 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017-09-04-mban/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://www.mit.edu/~zhuo/&#34; target=&#34;_blank&#34;&gt;Daisy Zhuo&lt;/a&gt; and I had the pleasure last week of leading a day-long session for MIT&amp;rsquo;s Master of Business Analytics students in which we survey a complete, &lt;a href=&#34;https://www.tidyverse.org/&#34; target=&#34;_blank&#34;&gt;tidy&lt;/a&gt; data science workflow for the &lt;code&gt;R&lt;/code&gt; programming language. If you are interested in a concise introduction to the basics, or can use these materials in your own teaching, please feel free to browse them &lt;a href=&#34;https://philchodrow.github.io/mban_orientation/data_science_intro/index.html&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. Feedback is most welcome!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>An Opinionated Introduction to Information Theory</title>
       <link>/post/intro_information_theory/</link>
       <pubDate>Fri, 25 Aug 2017 00:00:00 +0000</pubDate>
@@ -29,6 +39,14 @@
       
       <guid>/teaching_testimonials/</guid>
       <description>
+
+&lt;h2 id=&#34;introduction-to-data-science-in-r-fall-2017&#34;&gt;Introduction to Data Science in R, Fall 2017&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Super well organized and engaging.&lt;/em&gt; &lt;strong&gt;&lt;em&gt;Best R session I have ever had.&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Loved the instructor! Very energetic and clear in his instructions. It was a pleasure learning with him, wish my past professors were like him!&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Phil did a great job teaching the class. I loved the pace - not too fast, not too slow.&lt;/em&gt; &lt;strong&gt;&lt;em&gt;I feel confident in R going forward now.&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2 id=&#34;1-204r-spring-2017&#34;&gt;1.204R, Spring 2017&lt;/h2&gt;
 
@@ -589,16 +607,6 @@ Optimal transport on circular and rectangular lattices. The parameter &lt;span c
       
       <guid>/post/2016-06-23-rmarkdown_slides/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;http://rmarkdown.rstudio.com/&#34; target=&#34;_blank&#34;&gt;R Markdown&lt;/a&gt; is an authoring tool for easily sharing reproducible data analysis. If you are learning to use R Markdown, you may be interested in my recent &lt;a href=&#34;/resources/rmarkdown/rmarkdown.html&#34;&gt;slides&lt;/a&gt;  and (download links) &lt;a href=&#34;/resources/rmarkdown/ex1_skeleton.Rmd&#34;&gt;accompanying&lt;/a&gt; &lt;a href=&#34;/resources/rmarkdown/dash_example.Rmd&#34;&gt;exercises&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Slides and Exercises for ggplot2</title>
-      <link>/post/2016-06-08-ggplot2_slides/</link>
-      <pubDate>Wed, 08 Jun 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2016-06-08-ggplot2_slides/</guid>
-      <description>&lt;p&gt;The &lt;a href=&#34;http://ggplot2.org/&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;ggplot2&lt;/code&gt;&lt;/a&gt; package for the &lt;code&gt;R&lt;/code&gt; programming language is the best software in the world for 2-D data visualization. If you are new to &lt;code&gt;ggplot2&lt;/code&gt;, you may be interested in a set of simple &lt;a href=&#34;/resources/ggplot2/ggplot2.html&#34;&gt;slides&lt;/a&gt; I wrote, and (download links) the accompanying &lt;a href=&#34;/resources/ggplot2/dash_example.Rmd&#34;&gt;exercises&lt;/a&gt; in the R Markdown format.&lt;/p&gt;
 </description>
     </item>
     

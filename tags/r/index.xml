@@ -7,8 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017 Phil Chodrow</copyright>
-    <lastBuildDate>Mon, 19 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 04 Sep 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="/tags/r/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Introduction to Data Science in R</title>
+      <link>/post/2017-09-04-mban/</link>
+      <pubDate>Mon, 04 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017-09-04-mban/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://www.mit.edu/~zhuo/&#34; target=&#34;_blank&#34;&gt;Daisy Zhuo&lt;/a&gt; and I had the pleasure last week of leading a day-long session for MIT&amp;rsquo;s Master of Business Analytics students in which we survey a complete, &lt;a href=&#34;https://www.tidyverse.org/&#34; target=&#34;_blank&#34;&gt;tidy&lt;/a&gt; data science workflow for the &lt;code&gt;R&lt;/code&gt; programming language. If you are interested in a concise introduction to the basics, or can use these materials in your own teaching, please feel free to browse them &lt;a href=&#34;https://philchodrow.github.io/mban_orientation/data_science_intro/index.html&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;. Feedback is most welcome!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Information Measures Segregation</title>
