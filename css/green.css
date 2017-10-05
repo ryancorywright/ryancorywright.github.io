@@ -8,13 +8,13 @@
 
 html {
   font-family: 'Lato', sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   color: rgba(0,0,0,0.8);
   line-height: 1.65;
 }
 @media screen and (min-width: 58em) {
   html {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 
@@ -43,3 +43,13 @@ div.three {
   padding: 0;
   /*display: inline-block;*/
 }
+
+
+
+.home-section {
+  background-color: rgb(255, 255, 255);
+  padding: 40px 0 40px 0;
+  animation: intro 0.3s both;
+  animation-delay: 0.15s;
+}
+

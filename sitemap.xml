@@ -5,6 +5,15 @@
     
     <url>
     
+      <loc>/project/adaptive_networks/</loc>
+      <lastmod>2017-10-05T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/post/2017-09-04-divergence/</loc>
       <lastmod>2017-09-04T00:00:00+00:00</lastmod>
     </url>
@@ -70,6 +79,15 @@
     
       <loc>/talk/growth_lab/</loc>
       <lastmod>2017-08-09T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/project/urban_growth/</loc>
+      <lastmod>2017-08-05T00:00:00+00:00</lastmod>
     </url>
     
   
@@ -232,7 +250,7 @@
     <url>
     
       <loc>/tags/cities/</loc>
-      <lastmod>2017-03-21T00:00:00+00:00</lastmod>
+      <lastmod>2017-08-05T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -311,8 +329,28 @@
     
     <url>
     
+      <loc>/tags/modeling/</loc>
+      <lastmod>2017-10-05T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/networks/</loc>
+      <lastmod>2017-10-05T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/project/</loc>
-      <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+      <lastmod>2017-10-05T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -372,7 +410,7 @@
     <url>
     
       <loc>/tags/spatial/</loc>
-      <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+      <lastmod>2017-08-05T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -412,7 +450,7 @@
     <url>
     
       <loc>/tags/theory/</loc>
-      <lastmod>2017-03-21T00:00:00+00:00</lastmod>
+      <lastmod>2017-10-05T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

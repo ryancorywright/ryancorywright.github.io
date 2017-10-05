@@ -23,7 +23,7 @@
     <item>
       <title>Cities</title>
       <link>/tags/cities/</link>
-      <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/cities/</guid>
       <description></description>
@@ -75,6 +75,24 @@
     </item>
     
     <item>
+      <title>Modeling</title>
+      <link>/tags/modeling/</link>
+      <pubDate>Thu, 05 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/modeling/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Networks</title>
+      <link>/tags/networks/</link>
+      <pubDate>Thu, 05 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/networks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Publication</title>
       <link>/tags/publication/</link>
       <pubDate>Fri, 25 Aug 2017 00:00:00 +0000</pubDate>
@@ -113,7 +131,7 @@
     <item>
       <title>Spatial</title>
       <link>/tags/spatial/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/spatial/</guid>
       <description></description>
@@ -125,24 +143,6 @@
       <pubDate>Mon, 04 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/statistics/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Teaching</title>
-      <link>/tags/teaching/</link>
-      <pubDate>Mon, 04 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/teaching/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Theory</title>
-      <link>/tags/theory/</link>
-      <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/theory/</guid>
       <description></description>
     </item>
     

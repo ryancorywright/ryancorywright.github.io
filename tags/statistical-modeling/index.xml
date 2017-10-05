@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Statistical Modeling on Math for Humans</title>
+    <link>/tags/statistical-modeling/</link>
+    <description>Recent content in Statistical Modeling on Math for Humans</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017 Phil Chodrow</copyright>
+    <lastBuildDate>Sat, 05 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/statistical-modeling/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Multiscale Urban Growth</title>
+      <link>/project/urban_growth/</link>
+      <pubDate>Sat, 05 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/project/urban_growth/</guid>
+      <description>&lt;p&gt;Joint work with &lt;a href=&#34;https://scholar.google.com/citations?user=HsubcWgAAAAJ&amp;amp;hl=en&#34; target=&#34;_blank&#34;&gt;Ema Strano&lt;/a&gt;, &lt;a href=&#34;https://web.stanford.edu/~adalbert/&#34; target=&#34;_blank&#34;&gt;Adrian Albert&lt;/a&gt;, and &lt;a href=&#34;https://scholar.google.com/citations?user=YAGjro8AAAAJ&amp;amp;hl=en&#34; target=&#34;_blank&#34;&gt;Marta C. Gonzalez&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

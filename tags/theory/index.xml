@@ -7,8 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017 Phil Chodrow</copyright>
-    <lastBuildDate>Tue, 21 Mar 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 05 Oct 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="/tags/theory/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Network Community Dynamics</title>
+      <link>/project/adaptive_networks/</link>
+      <pubDate>Thu, 05 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/project/adaptive_networks/</guid>
+      <description>&lt;p&gt;Joint work with &lt;a href=&#34;http://mucha.web.unc.edu/&#34; target=&#34;_blank&#34;&gt;Peter J. Mucha&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Why Fractal Cities?</title>
