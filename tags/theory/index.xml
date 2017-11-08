@@ -7,8 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017 Phil Chodrow</copyright>
-    <lastBuildDate>Thu, 05 Oct 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 08 Nov 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="/tags/theory/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Big Causal Inference</title>
+      <link>/post/2017-11-08-causal_inference/</link>
+      <pubDate>Wed, 08 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017-11-08-causal_inference/</guid>
+      <description>&lt;p&gt;On Thursday, Nov. 9th, I&amp;rsquo;ll be giving a talk to the Human Mobility and Networks lab on the elements of &lt;strong&gt;&lt;em&gt;causal inference&lt;/em&gt;&lt;/strong&gt;, the statistical toolbox for inferring and quantifying causal relationships between phenomena. While it&amp;rsquo;s easy to take a data set and show, say, that smoking is &lt;em&gt;correlated&lt;/em&gt; with lung cancer, it&amp;rsquo;s much harder to formulate a testable, mathematical theory to support the claim that smoking &lt;em&gt;causes&lt;/em&gt; lung cancer. Causal inference, as developed in its most prominent form by Judea Pearl, tackles this challenge through the threefold framework of structural causal modeling; &lt;em&gt;do&lt;/em&gt;-calculus, and causal directed acyclic graphs (DAGs).&lt;/p&gt;
+
+&lt;p&gt;My talk on Thursday will briefly motivate and introduce these concepts, and discuss some prospects for the use of causal methods in the context of massive, passively-collected data sets. You can find my slides &lt;a href=&#34;/pdf/causal_inference.pdf&#34;&gt;here&lt;/a&gt;. Feedback is most welcome.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Network Community Dynamics</title>
