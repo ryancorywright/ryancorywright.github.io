@@ -1,3 +1,3 @@
-# Professional Website of Phil Chodrow
+# Professional Website of Ryan Cory-Wright
 
-[https://philchodrow.github.io/](https://philchodrow.github.io/)
+[https://ryancorywright.github.io/](https://ryancorywright.github.io/)
