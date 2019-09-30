@@ -58,7 +58,7 @@
 
   
 
-  <title>A scalable algorithm for sparse and robust portfolios| Ryan Cory-Wright</title>
+  <title>A Scalable Algorithm For Sparse Portfolio Selection| Ryan Cory-Wright</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#navbar-main" data-offset="71">
@@ -153,7 +153,7 @@
 
 
   <div class="container pub-title">
-    <h1 itemprop="name">A scalable algorithm for sparse and robust portfolios</h1>
+    <h1 itemprop="name">A Scalable Algorithm For Sparse Portfolio Selection</h1>
     <span class="pub-authors" itemprop="author">
       
       D Bertsimas, R. Cory-Wright
@@ -167,7 +167,7 @@
 
   <h3>Abstract</h3>
   <p class="pub-abstract" itemprop="text">
-    A central problem in financial economics concerns investing capital to maximize a portfolio's expected return while minimizing its variance, subject to an upper bound on the number of positions, minimum investment and linear inequality constraints, at scale. Existing approaches to this problem do not provide provably optimal portfolios for real-world problem sizes with more than 300 securities. In this paper, we present a cutting-plane method which solves problems with $1000$s of securities to provable optimality, by exploiting a dual representation of the continuous Markowitz problem to obtain a closed form representation of the problem's subgradients. We improve the performance of the cutting-plane method in three different ways. First, we implement a local-search heuristic which applies our subgradient representation to obtain high-quality warm-starts. Second, we embed the local-search heuristic within the cutting-plane method to accelerate recovery of an optimal solution. Third, we exploit a correspondence between the convexified sparse Markowitz problem and a rotated second-order cone problem to obtain a tight lower bound which is sometimes exact. Finally, we establish that the cutting-plane method is 3-4 orders of magnitude more efficient than existing methods, and construct provably optimal sparsity-constrained frontiers for the S&P 500, Russell 1000, and Wilshire 5000.
+  The sparse portfolio selection problem is one of the most famous and frequently-studied problems in the optimization and financial economics literatures. In a universe of risky assets, the goal is to construct a portfolio with maximal expected return and minimum variance, subject to an upper bound on the number of positions, linear inequalities and minimum investment constraints. Existing certifiably optimal approaches to this problem do not converge within a practical amount of time at real world problem sizes with more than 400 securities. In this paper, we propose a more scalable approach. By imposing a ridge regularization term, we reformulate the problem as a convex binary optimization problem, which is solvable via an efficient outer-approximation procedure. We propose various techniques for improving the performance of the procedure, including a heuristic which supplies high-quality warm-starts, a preprocessing technique for decreasing the gap at the root node, and an analytic technique for strengthening our cuts. We also study the problem's Boolean relaxation, establish that it is second-order-cone representable, and supply a sufficient condition for its tightness. In numerical experiments, we establish that the outer-approximation procedure gives rise to dramatic speedups for sparse portfolio selection problems.  
   <div class="row">
     <div class="col-sm-1"></div>
     <div class="col-sm-10">
@@ -210,7 +210,7 @@
 
           
 
-<a class="btn btn-primary btn-outline" href="/pdf/Bertsimas_CoryWright_SparsePortfolios_2018.pdf">
+<a class="btn btn-primary btn-outline" href="/pdf/Sparse_Markowitz_for_OR_2019_revision1.pdf">
   PDF
 </a>
 
