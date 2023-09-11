@@ -544,7 +544,7 @@ article {
 
 .pub-list-item .pub-publication {
   color: #090;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 .pub-list-item .pub-links {
@@ -555,7 +555,7 @@ article {
   display: block;
   position: relative;
   overflow: hidden;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 /*************************************************
